@@ -10,11 +10,15 @@ export default function Home() {
 
     const router = useRouter();
 
+    const handleLogin = () => {
+        router.push('/home');
+    }
+
     return (
-        <div>
-            <nav className="flex items-center justify-between p-6 pl-10 pr-10">
+        <div className='h-screen bg-neutral-900 bg-opacity-70'>
+            <nav className="items-center justify-between p-7 pl-10 pr-10 w-full">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
-                    <span className={`font-bold text-sl tracking-tight ${lexend.className}`}>
+                    <span className={`font-bold text-sl tracking-tight pt-1 ${lexend.className}`}>
                         <button
                             onClick={() => router.push('/')}
                         >
@@ -23,15 +27,54 @@ export default function Home() {
                     </span>
                 </div>
             </nav>
-            <div className='container mx-auto px-10 pt-5 text-center'>
-                <h1 className={`font-bold text-5xl text-center text-white leading-tight ${lexend.className}`}>Juega, califica y conecta: Tu plataforma para compartir tu experiencia gamer</h1>
-                <h2 className={`text-base mt-5 text-center text-white leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
-                <button
-                    className="m-auto mt-10 bg-blue-800 hover:bg-blue-600 text-white px-4 py-4 rounded-full"
-                    onClick={() => router.push('/signup')}
-                >
-                    Comenzar en ANDIGAMES
-                </button>
+            <div className='flex flex-col items-center justify-center'>
+                <div className='container mx-auto px-10 text-center'>
+                    <h1 className={`font-bold text-5xl text-center text-white leading-tight ${lexend.className}`}>
+                        ¡Qué bueno volver a verte!
+                    </h1>
+                    <h2 className={`font-semibold text-2xl mt-5 text-center text-neutral-400 leading-tight ${lexend.className}`}>
+                        ¡Ingresa para jugar, calificar y conectar!
+                    </h2>
+                </div>
+                <div className="w-full max-w-md items-center justify-center m-10 bg-neutral-800 rounded p-10">
+                    <form className="">
+                        <div className="mb-4">
+                            <h2 className={`font-bold text-3xl text-center text-white ${lexend.className}`}>
+                                Inicia sesión
+                            </h2>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-neutral-400 text-sm font-bold mb-2" for="username">
+                                Usuario
+                            </label>
+                            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Ingresa tu nombre de usuario"></input>
+                        </div>
+                        <div className="mb-9">
+                            <label className="block text-neutral-400 text-sm font-bold mb-2" for="password">
+                                Contraseña
+                            </label>
+                            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Ingresa tu contraseña"></input>
+                        </div>
+                        <div className="mb-4">
+                            <button
+                                className="w-full bg-blue-800 hover:bg-blue-600 text-white font-base py-2 px-4 rounded"
+                                onClick={() =>
+                                    handleLogin()}
+                            >
+                                Iniciar sesión
+                            </button>
+                        </div>
+                    </form>
+                    <div className="">
+                        <button
+                            className="w-full hover:text-blue-400 text-blue-600 font-base px-4 rounded"
+                            onClick={() =>
+                                router.push('../signup')}
+                        >
+                            ¿Nuevo en GAMETAG? Regístrate ahora
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )

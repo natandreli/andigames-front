@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div>
-      <nav className="flex items-center justify-between p-6 pl-10 pr-10">
+      <nav className="flex items-center justify-between p-6 pl-10 pr-10 w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className={`font-bold text-sl tracking-tight ${lexend.className}`}>
             <button
