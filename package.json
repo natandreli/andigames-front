@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^14.0.1",
     "@next/swc-darwin-x64": "^14.0.1",
     "next": "^14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-datepicker": "^4.21.0",
+    "react-dom": "^18",
+    "swc": "^1.0.11"
   },
   "devDependencies": {
     "autoprefixer": "^10",
