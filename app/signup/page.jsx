@@ -36,81 +36,79 @@ export default function Home() {
           </h2>
         </div>
         <div className="w-full max-w-md items-center justify-center m-10 bg-neutral-800 rounded p-10">
-          <form className="">
-            <div className="mb-4">
-              <h2 className={`font-bold text-xl sm:text-3xl text-center text-white ${lexend.className}`}>
-                Regístrate
-              </h2>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Correo electrónico <span className="text-red-500">*</span>
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="ejemplo@correo.com"></input>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Apodo
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nickname" type="text" placeholder="¿Cómo te gustaría que te llamaramos?"></input>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Usuario <span className="text-red-500">*</span>
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Ingresa un nombre de usuario"></input>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Contraseña <span className="text-red-500">*</span>
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Ingresa una contraseña"></input>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Contraseña <span className="text-red-500">*</span>
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password2" type="password" placeholder="Ingresa nuevamente la contraseña"></input>
-            </div>
-            <div className="mb-4">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Fecha de nacimiento <span className="text-red-500">*</span>
-              </label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password2" type="birthdate" placeholder="Ingresa tu fecha de nacimiento"></input>
-            </div>
-            <div className="w-full mb-6">
-              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                Género <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <select className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                  <option>Femenino</option>
-                  <option>Masculino</option>
-                  <option>Otro</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-                </div>
+          <div className="mb-4">
+            <h2 className={`font-bold text-xl sm:text-3xl text-center text-white ${lexend.className}`}>
+              Regístrate
+            </h2>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Correo electrónico <span className="text-red-500">*</span>
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="ejemplo@correo.com"></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Apodo
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nickname" type="text" placeholder="¿Cómo te gustaría que te llamaramos?"></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Usuario <span className="text-red-500">*</span>
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Ingresa un nombre de usuario"></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Contraseña <span className="text-red-500">*</span>
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Ingresa una contraseña"></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Contraseña <span className="text-red-500">*</span>
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password2" type="password" placeholder="Ingresa nuevamente la contraseña"></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Fecha de nacimiento <span className="text-red-500">*</span>
+            </label>
+            <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password2" type="birthdate" placeholder="Ingresa tu fecha de nacimiento"></input>
+          </div>
+          <div className="w-full mb-6">
+            <label className="block text-neutral-400 text-sm font-bold mb-2">
+              Género <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <select className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option>Femenino</option>
+                <option>Masculino</option>
+                <option>Otro</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
               </div>
             </div>
-            <div className="mb-9">
-              <label className="block text-neutral-400 text-sm">
-                <input className="mr-2 accent-blue-800" type="checkbox"></input>
-                <span>
-                  Estoy de acuerdo con los términos y condiciones <span className="text-red-500">*</span>
-                </span>
-              </label>
-            </div>
-            <div className="mb-4">
-              <button
-                className="w-full bg-blue-800 hover:bg-blue-600 text-white font-base py-2 px-4 rounded"
-                onClick={() =>
-                  handleSignup()}
-              >
-                Registrarme
-              </button>
-            </div>
-          </form>
+          </div>
+          <div className="mb-9">
+            <label className="block text-neutral-400 text-sm">
+              <input className="mr-2 accent-blue-800" type="checkbox"></input>
+              <span>
+                Estoy de acuerdo con los términos y condiciones <span className="text-red-500">*</span>
+              </span>
+            </label>
+          </div>
+          <div className="mb-4">
+            <button
+              className="w-full bg-blue-800 hover:bg-blue-600 text-white font-base py-2 px-4 rounded"
+              onClick={() =>
+                handleSignup()}
+            >
+              Registrarme
+            </button>
+          </div>
           <div className="">
             <button
               className="w-full hover:text-blue-400 text-blue-600 font-sm px-4 rounded"
