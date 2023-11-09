@@ -28,16 +28,16 @@ export default function Home() {
             </nav>
             <div className='flex flex-col items-center justify-center'>
                 <div className='container mx-auto px-10 text-center'>
-                    <h1 className={`font-bold text-3xl sm:text-5xl text-center text-white leading-tight ${lexend.className}`}>
+                    <h1 className={`font-bold text-2xl sm:text-4xl text-center text-white leading-tight ${lexend.className}`}>
                         Ups, ¡Vamos a solucionar esto!
                     </h1>
-                    <h2 className={`font-semibold text-lg sm:text-2xl mt-5 text-center text-neutral-400 leading-tight ${lexend.className}`}>
+                    <h2 className={`font-semibold text-base sm:text-xl mt-5 text-center text-neutral-400 leading-tight ${lexend.className}`}>
                         Recuperemos tu contraseña
                     </h2>
                 </div>
                 <div className="w-full max-w-md items-center justify-center m-10 bg-neutral-800 rounded p-10">
                     <div className="mb-4">
-                        <h2 className={`font-bold text-xl sm:text-3xl text-center text-white ${lexend.className}`}>
+                        <h2 className={`font-bold text-lg sm:text-2xl text-center text-white ${lexend.className}`}>
                             Recupera tu contraseña
                         </h2>
                     </div>

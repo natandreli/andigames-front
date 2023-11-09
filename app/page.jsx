@@ -41,12 +41,12 @@ export default function Home() {
       </nav>
       <div className='container mx-auto px-10 pt-5 text-center'>
         <h1 className={`font-bold text-3xl sm:text-5xl text-center text-white sm:leading-tight ${lexend.className}`}>Juega, califica y conecta: Tu plataforma para compartir tu experiencia gamer</h1>
-        <h2 className={`text-base mt-5 text-center text-white sm:leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
+        <h2 className={`text-lg sm:text-xl mt-5 text-center text-white sm:leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
         <button
-          className="m-auto mt-10 bg-blue-800 hover:bg-blue-600 text-white px-4 py-3 rounded-full"
+          className="m-auto mt-8 bg-blue-800 hover:bg-blue-600 text-white px-10 py-3 rounded-full"
           onClick={() => router.push('/signup')}
         >
-          Comenzar en ANDIGAMES
+          Comenzar
         </button>
       </div>
     </div>

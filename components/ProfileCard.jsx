@@ -1,33 +1,35 @@
-import { Lexend, Manrope } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 import Image from 'next/image';
 import Counter from '@/components/Counter';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function ProfileCard({ games, following, followers, nickname, username, description }) {
-    return (
-        <div className='mr-7 flex h-full w-5/6'>
-            <div className='mr-6' style={{ minWidth: '200px', minHeight: '200px' }}>
-                <Image
-                    src="/profile.png"
-                    width={200}
-                    height={200}
-                    alt="Profile picture"
-                    className='rounded-full align-middle border-none'
-                />
-            </div>
-            <div className='justify-center flex flex-col'>
-                <Counter games={games} following={following} followers={followers} />
-                <span className={`font-bold text-white text-2xl ${lexend.className}`}>
-                    {nickname}
-                </span>
-                <span className={`font-bold text-neutral-400 text-base ${lexend.className}`}>
-                    {'@' + username}
-                </span>
-                <span className={`mt-2 text-neutral-300 text-base`}>
-                    {description ? description : 'No hay descripción'}
-                </span>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex flex-col sm:flex-row items-center h-full w-full">
+      <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '150px', minHeight: '150px' }}>
+        <Image
+          src="/profile.png"
+          width={110} // Cambia el valor del ancho de la imagen para hacerla más pequeña en dispositivos móviles
+          height={110} // Cambia el valor del alto de la imagen para mantener la proporción
+          alt="Profile picture"
+          className="rounded-full align-middle border-none max-w-3/4"
+        />
+      </div>
+      <div className="justify-center flex flex-col">
+        <Counter games={games} following={following} followers={followers} />
+        <span className={`font-bold text-white text-sm lg:text-xl ${lexend.className}`}>
+          {nickname}
+        </span>
+        <span className={`font-bold text-neutral-400 text-[10px] lg:text-sm ${lexend.className}`}>
+          {'@' + username}
+        </span>
+        <span className="mt-2 text-neutral-300 text-[10px] lg:text-sm">
+          {description ? description : 'No hay descripción'}
+        </span>
+      </div>
+    </div>
+  );
 }
+
+  
