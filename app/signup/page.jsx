@@ -14,7 +14,9 @@ export default function Home() {
   }
 
   return (
-    <div className='h-full bg-neutral-900 bg-opacity-70'>
+    <div className=''>
+      <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
+      </div>
       <nav className="items-center justify-between p-7 pl-10 pr-10 w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className={`font-bold sm:text-lg text-xs tracking-tight pt-1 ${lexend.className}`}>

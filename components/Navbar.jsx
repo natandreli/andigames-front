@@ -1,6 +1,5 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Lexend } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 
@@ -45,7 +44,7 @@ export default function Navbar({ actualPage }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-center hidden sm:ml-6 sm:block">
-                                    <div className="flex text-center space-x-4 text-[10px] lg:text-xs font-semibold items-center justify-center">
+                                    <div className="flex text-center space-x-4 text-xs lg:text-sm font-semibold items-center justify-center">
                                         {navigation.map((item) => (
                                             <a
                                                 key={item.name}

@@ -5,10 +5,234 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ProfileCard from '@/components/ProfileCard';
 import Awards from '@/components/Awards';
+import Game from '@/components/Game';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
+
+    const exampleGames = [
+        {   
+            title: 'A Space for the Unbound',
+            cover: '/games-covers/a-space-for-the-unbound-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Barotrauma',
+            cover: '/games-covers/barotrauma-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Big Ambitions',
+            cover: '/games-covers/big-ambitions-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Bloody Hell',
+            cover: '/games-covers/bloody-hell-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Boneraiser Minions',
+            cover: '/games-covers/boneraiser-minions-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Crab Champions',
+            cover: '/games-covers/crab-champions-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Dead Space',
+            cover: '/games-covers/dead-space-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Dredge',
+            cover: '/games-covers/dredge-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Half Life: MMod',
+            cover: '/games-covers/half-life-mmod-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'HI-FI Rush',
+            cover: '/games-covers/hi-fi-rush-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Hogwarts Legacy',
+            cover: '/games-covers/hogwarts-legacy-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Larcin Lazer',
+            cover: '/games-covers/larcin-lazer-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Luck be a Landlord',
+            cover: '/games-covers/luck-be-a-landlord-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Octopath Traveler II',
+            cover: '/games-covers/octopath-traveler-ii-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Pineapple on Pizza',
+            cover: '/games-covers/pineapple-on-pizza-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Pizza Tower',
+            cover: '/games-covers/pizza-tower-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Resident Evil 4',
+            cover: '/games-covers/resident-evil-4-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'The Last Spell',
+            cover: '/games-covers/the-last-spell-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'The Murder of Sonic the Hedgehog',
+            cover: '/games-covers/the-murder-of-sonic-the-hedgehog-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+        {   
+            title: 'Vertigo 2',
+            cover: '/games-covers/vertigo-2-cover.jpeg',
+            genre: 'Aventura, Indie',
+            realease_date: '19 Ene, 2023',
+            publisher: 'Toge Productions',
+            developer: 'Mojiken',
+            steam_rating: '9.3',
+            plataform_rating: '9.5',
+            url: '/app/1201270/'    
+        },
+    ];
 
     const [isButtonGamesDisabled, setButtonGamesDisabled] = useState(true);
     const [isButtonWishListDisabled, setButtonWishListDisabled] = useState(false);
@@ -81,7 +305,9 @@ export default function Home() {
     };
 
     return (
-        <div className='h-full w-screen bg-center bg-neutral-900 bg-opacity-70'>
+        <div className=''>
+            <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
+            </div>
             <Navbar actualPage='home' />
             <div className={`grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 w-screen justify-center items-center py-2 px-10`}>
                 <ProfileCard
@@ -206,7 +432,24 @@ export default function Home() {
                     </div>
                 </nav>
             </div>
-            <div className='grid grid-cols-3 lg:grid-cols-7'>
+            <div className='flex items-center justify-center lg:pl-5'>
+            <div className='px-10 py-3 grid grid-cols-3 gap-6 md:grid-cols-5 md:gap-6 lg:grid-cols-8 lg:gap-0 xl:grid-cols-9 xl:gap-0'>
+                {exampleGames.map((game) => (
+                    <Game
+                        key={game.title}
+                        title={game.title}
+                        cover={game.cover}
+                        genre={game.genre}
+                        realease_date={game.realease_date}
+                        publisher={game.publisher}
+                        developer={game.developer}
+                        steam_rating={game.steam_rating}
+                        plataform_rating={game.plataform_rating}
+                        url={game.url}
+                    />
+                )
+                )}
+            </div>
             </div>
         </div>
     )
