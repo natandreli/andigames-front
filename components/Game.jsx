@@ -1,14 +1,20 @@
 import { Lexend } from 'next/font/google';
 import Image from 'next/image';
+import { Fragment, useRef, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, plataform_rating, url }) {
+export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url }) {
+    const [openModal, setOpenModal] = useState(false)
+    const cancelButtonRef = useRef(null)
+
     return (
         <div>
             <div className="flex flex-col sm:flex-row items-center h-full w-full">
                 <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '90px', minHeight: '128px' }}>
-                    <button>
+                    <button
+                        onClick={() => setOpenModal(true)}>
                         <Image
                             src={cover}
                             width={120}
@@ -19,6 +25,106 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                     </button>
                 </div>
             </div>
+
+            <Transition.Root show={openModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-neutral-900 bg-opacity-70 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+                                    <button className="absolute top-4 right-4" onClick={() => setOpenModal(false)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#a3a3a3" className="w-5 h-5">
+                                            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                        </svg>
+                                    </button>
+                                    <div className="bg-neutral-800 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                                        <div className="sm:flex sm:items-start style={{ minWidth: '150px', minHeight: '200px' }">
+                                            <div className="mx-auto flex h-auto w-auto flex-shrink-0 items-center justify-center sm:mx-0 sm:h-auto sm:w-auto" style={{ minWidth: '150px', minHeight: '200px' }}>
+                                                <Image
+                                                    src={cover}
+                                                    width={180}
+                                                    height={241}
+                                                    alt={title}
+                                                    className="rounded align-middle border-none"
+                                                />
+                                            </div>
+                                            <div className="mt-5 sm:ml-4 sm:mt-0">
+                                                <Dialog.Title as="h1" className={`text-center sm:text-left mb-4 sm:mb-4 text-2xl font-bold leading-6 text-white ${lexend.className}`}>
+                                                    {title}
+                                                </Dialog.Title>
+                                                <div className="text-left text-neutral-400 text-base">
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Género:</span> {genre}
+                                                    </p>
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Fecha de lanzamiento:</span> {realease_date}
+                                                    </p>
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Distribuidor:</span> {publisher}
+                                                    </p>
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Desarrollador:</span> {developer}
+                                                    </p>
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Puntuación en Steam:</span> {steam_rating}
+                                                    </p>
+                                                    <p className="mb-1">
+                                                        <span className={`font-bold ${lexend.className}`}>Puntuación en ANDIGAMES:</span> {platform_rating}
+                                                    </p>
+                                                </div>
+                                                <div className="flex flex-col items-center sm:flex-row sm:items-start mt-4">
+                                                    <button
+                                                        type="button"
+                                                        className="mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
+                                                        onClick={() => handlePlay()}
+                                                    >
+                                                        ¡Lo he jugado!
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
+                                                        onClick={() => window.open('https://store.steampowered.com' + url, '_blank')}
+                                                    >
+                                                        Ir a la tienda
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
+                                                        onClick={() => handleAddToWishlist()}
+                                                    >
+                                                        Agregar a mi lista de deseos
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition.Root>
         </div>
     );
 }

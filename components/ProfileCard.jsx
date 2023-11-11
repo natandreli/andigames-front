@@ -10,8 +10,8 @@ export default function ProfileCard({ games, following, followers, nickname, use
       <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '150px', minHeight: '150px' }}>
         <Image
           src="/profile.png"
-          width={110} // Cambia el valor del ancho de la imagen para hacerla más pequeña en dispositivos móviles
-          height={110} // Cambia el valor del alto de la imagen para mantener la proporción
+          width={110} 
+          height={110} 
           alt="Profile picture"
           className="rounded-full align-middle border-none max-w-3/4"
         />
