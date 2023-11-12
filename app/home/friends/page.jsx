@@ -3,7 +3,7 @@
 import { Lexend } from 'next/font/google';
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import ProfileCard from '@/components/ProfileCard';
+import ProfileCardFriend from '@/components/ProfileCardFriend';
 import Awards from '@/components/Awards';
 import Game from '@/components/Game';
 
@@ -310,8 +310,8 @@ export default function Home() {
             </div>
             <Navbar actualPage='home' />
             <div className={`grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 w-screen justify-center items-center py-2 px-10`}>
-                <ProfileCard
-                    photo={'/profile.png'}
+                <ProfileCardFriend
+                    photo={'profile.png'}
                     games={'100'}
                     following={'50'}
                     followers={'150'}

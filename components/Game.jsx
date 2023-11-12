@@ -7,7 +7,6 @@ const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url }) {
     const [openModal, setOpenModal] = useState(false)
-    const cancelButtonRef = useRef(null)
 
     return (
         <div>
@@ -27,7 +26,7 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
             </div>
 
             <Transition.Root show={openModal} as={Fragment}>
-                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenModal}>
+                <Dialog as="div" className="relative z-10" onClose={setOpenModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -41,7 +40,7 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                     </Transition.Child>
 
                     <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -51,9 +50,9 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:my-8 w-xl sm:w-full sm:max-w-2xl">
                                     <button className="absolute top-4 right-4" onClick={() => setOpenModal(false)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#a3a3a3" className="w-5 h-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5">
                                             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
                                         </svg>
                                     </button>
@@ -87,9 +86,16 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                                     </p>
                                                     <p className="mb-1">
                                                         <span className={`font-bold ${lexend.className}`}>Puntuación en Steam:</span> {steam_rating}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-4 h-4 mb-1 ml-1 inline-block">
+                                                            <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                                                        </svg>
                                                     </p>
                                                     <p className="mb-1">
                                                         <span className={`font-bold ${lexend.className}`}>Puntuación en ANDIGAMES:</span> {platform_rating}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-4 h-4 mb-1 mx-1 inline-block">
+                                                            <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                                                        </svg>
+                                                        <span className="inline-block text-amber-400 text-sm">(123)</span> 
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col items-center sm:flex-row sm:items-start mt-4">
