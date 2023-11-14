@@ -234,17 +234,89 @@ export default function Home() {
         },
     ];
 
+    const exampleFollowers = [
+        {
+            username: 'pepito',
+            nickname: 'pepe el pollo',
+            games: '98',
+            photo: '/profile2.png'
+        },
+        {
+            username: 'natibara',
+            nickname: 'natibara la capibara',
+            games: '98',
+            photo: '/profile.png'
+        },
+        {
+            username: 'mantres',
+            nickname: 'dres la mantis',
+            games: '98',
+            photo: '/profile2.png'
+        },
+        {
+            username: 'natandreli',
+            nickname: 'naty la andy',
+            games: '98',
+            photo: '/profile.png'
+        },
+        {
+            username: 'horsepepe',
+            nickname: 'pepe el caballo',
+            games: '98',
+            photo: '/profile2.png'
+        }
+    ];
+
+    const exampleFollowing = [
+        {
+            username: 'pepito',
+            nickname: 'pepe el pollo',
+            games: '98',
+            photo: '/profile2.png'
+        },
+        {
+            username: 'natibara',
+            nickname: 'natibara la capibara',
+            games: '98',
+            photo: '/profile.png'
+        },
+        {
+            username: 'mantres',
+            nickname: 'dres la mantis',
+            games: '98',
+            photo: '/profile2.png'
+        },
+        {
+            username: 'natandreli',
+            nickname: 'naty la andy',
+            games: '98',
+            photo: '/profile.png'
+        },
+        {
+            username: 'horsepepe',
+            nickname: 'pepe el caballo',
+            games: '98',
+            photo: '/profile2.png'
+        }
+    ];
+
+    const [setThirdNavbar, setThirdNavbarState] = useState(true);
+
     const [isButtonGamesDisabled, setButtonGamesDisabled] = useState(true);
     const [isButtonWishListDisabled, setButtonWishListDisabled] = useState(false);
 
     const handleButtonGamesClick = () => {
         setButtonGamesDisabled(true);
         setButtonWishListDisabled(false);
+
+        setThirdNavbarState(true);
     };
 
     const handleButtonWishListClick = () => {
         setButtonGamesDisabled(false);
         setButtonWishListDisabled(true);
+
+        setThirdNavbarState(false);
     };
 
     const [isButtonAllDisabled, setButtonAllDisabled] = useState(true);
@@ -311,10 +383,10 @@ export default function Home() {
             <Navbar actualPage='home' />
             <div className={`grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 w-screen justify-center items-center py-2 px-10`}>
                 <ProfileCardFriend
-                    photo={'profile.png'}
-                    games={'100'}
-                    following={'50'}
-                    followers={'150'}
+                    photo={'/profile.png'}
+                    games={exampleGames.length}
+                    following={exampleFollowing}
+                    followers={exampleFollowers}
                     nickname={'natibara la capibara'}
                     username={'natandreli'}
                     description={'Estoy sufriendo un poco con el desarrollo de esta página, pero me alegro de haber logrado llegar a este punto.'}
@@ -353,86 +425,84 @@ export default function Home() {
                     </div>
                 </nav>
             </div>
-            <div className={``}>
-                <nav className="flex items-center sm:py-2 px-10 w-full">
-                    <div className="block text-[8px] lg:text-xs text-neutral-400">
-                        <ul className="flex">
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonAllDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonAllClick}
-                                    disabled={isButtonAllDisabled}
-                                >
-                                    Todos
-                                </button>
-                            </li>
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonLoveDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonLoveClick}
-                                    disabled={isButtonLoveDisabled}
-                                >
-                                    Me encantaron
-                                </button>
-                            </li>
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonLikeDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonLikeClick}
-                                    disabled={isButtonLikeDisabled}
-                                >
-                                    Me gustaron
-                                </button>
-                            </li>
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonMehDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonMehClick}
-                                    disabled={isButtonMehDisabled}
-                                >
-                                    Meh
-                                </button>
-                            </li>
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonDislikeDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonDislikeClick}
-                                    disabled={isButtonDislikeDisabled}
-                                >
-                                    No me gustaron
-                                </button>
-                            </li>
-                            <li className="mr-4 mb-2">
-                                <button
-                                    className={`${isButtonHateDisabled
-                                        ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-blue-800'
-                                        }  px-2 py-3 rounded-lg`}
-                                    onClick={handleButtonHateClick}
-                                    disabled={isButtonHateDisabled}
-                                >
-                                    Fueron lo peor
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            {setThirdNavbar && <div className="flex flex-wrap items-center sm:py-2 px-10 w-full sm:mt-0 mt-4">
+                <div className="block text-[8px] lg:text-xs text-neutral-400">
+                    <ul className="flex flex-wrap">
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonAllDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonAllClick}
+                                disabled={isButtonAllDisabled}
+                            >
+                                Todos
+                            </button>
+                        </li>
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonLoveDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonLoveClick}
+                                disabled={isButtonLoveDisabled}
+                            >
+                                Me encantaron
+                            </button>
+                        </li>
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonLikeDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonLikeClick}
+                                disabled={isButtonLikeDisabled}
+                            >
+                                Me gustaron
+                            </button>
+                        </li>
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonMehDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonMehClick}
+                                disabled={isButtonMehDisabled}
+                            >
+                                Meh
+                            </button>
+                        </li>
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonDislikeDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonDislikeClick}
+                                disabled={isButtonDislikeDisabled}
+                            >
+                                No me gustaron
+                            </button>
+                        </li>
+                        <li className="mr-4 mb-2">
+                            <button
+                                className={`${isButtonHateDisabled
+                                    ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
+                                    : 'hover:text-white hover:bg-blue-800'
+                                    }  px-2 sm:py-3 py-2 rounded-lg`}
+                                onClick={handleButtonHateClick}
+                                disabled={isButtonHateDisabled}
+                            >
+                                Fueron lo peor
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>}
             <div className='flex items-center justify-center lg:pl-5'>
                 <div className='px-10 py-3 grid grid-cols-3 gap-6 md:grid-cols-5 md:gap-6 lg:grid-cols-8 lg:gap-0 xl:grid-cols-9 xl:gap-0'>
                     {exampleGames.map((game) => (

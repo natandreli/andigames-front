@@ -6,7 +6,7 @@ import Counter from '@/components/Counter';
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function ProfileCard({ photo, games, following, followers, nickname, username, description }) {
-    const router =  useRouter();
+    const router = useRouter();
 
     return (
         <div className="flex flex-col sm:flex-row items-center h-full w-full">
@@ -30,6 +30,9 @@ export default function ProfileCard({ photo, games, following, followers, nickna
                 <span className="mt-2 text-neutral-300 text-[10px] lg:text-sm">
                     {description ? description : 'No hay descripción'}
                 </span>
+                <button className="mt-4 items-center justify-center text-center px-2 lg:px-3 py-1 sm:text-sm inline-flex sm:w-24 justify-center rounded-md bg-neutral-900 text-[10px] text-neutral-400 border border-neutral-400 hover:bg-neutral-700">
+                    Seguir
+                </button>
             </div>
         </div>
     );
