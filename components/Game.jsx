@@ -1,23 +1,24 @@
 import { Lexend } from 'next/font/google';
 import Image from 'next/image';
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import Review from './Review';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function Game({ title, nickname, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, review = null }) {
+export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, me_review = null, friend_review = null, w = 120, h = 170 }) {
     const [openModal, setOpenModal] = useState(false)
 
     return (
         <div>
             <div className="flex flex-col sm:flex-row items-center h-full w-full">
-                <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '90px', minHeight: '128px' }}>
+                <div className="items-center flex justify-center" style={{ minWidth: '90px', minHeight: '128px' }}>
                     <button
                         onClick={() => setOpenModal(true)}>
                         <Image
                             src={cover}
-                            width={120}
-                            height={170}
+                            width={w}
+                            height={h}
                             alt={title}
                             className="rounded align-middle border-none"
                         />
@@ -50,7 +51,7 @@ export default function Game({ title, nickname, cover, genre, realease_date, pub
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="pb-6 pt-4 px-1 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:my-8 w-xl sm:w-full sm:max-w-[685px]">
+                                <Dialog.Panel className="pb-6 pt-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[710px]">
                                     <button className="absolute top-4 right-4" onClick={() => setOpenModal(false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
                                             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -65,6 +66,7 @@ export default function Game({ title, nickname, cover, genre, realease_date, pub
                                                     height={268}
                                                     alt={title}
                                                     className="rounded align-middle border-none"
+                                                    priority={false}
                                                 />
                                             </div>
                                             <div className="mt-5 sm:ml-4 sm:mt-0">
@@ -100,10 +102,10 @@ export default function Game({ title, nickname, cover, genre, realease_date, pub
                                                 </div>
                                                 <div className="flex flex-col items-center sm:flex-row sm:items-start mt-4">
                                                     <button
-                                                        className={`mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md px-3 py-2 text-xs border border-neutral-400 ${review ? 'bg-neutral-400 text-neutral-700 font-semibold hover:bg-neutral-300' : 'text-neutral-400 bg-neutral-800 hover:bg-neutral-700'}`}
+                                                        className={`mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md px-3 py-2 text-xs border border-neutral-400 ${me_review ? 'bg-neutral-400 text-neutral-700 font-semibold hover:bg-neutral-300' : 'text-neutral-400 bg-neutral-800 hover:bg-neutral-700'}`}
                                                         onClick={() => handlePlay()}
                                                     >
-                                                        {review ? 'No lo he jugado' : '¡Lo he jugado!'}
+                                                        {me_review ? 'No lo he jugado' : '¡Lo he jugado!'}
                                                     </button>
                                                     <button
                                                         className="mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
@@ -121,28 +123,12 @@ export default function Game({ title, nickname, cover, genre, realease_date, pub
                                             </div>
                                         </div>
                                     </div>
-                                    {review &&
-                                        <div className="bg-neutral-800 px-4 pb-4 sm:px-6">
-                                            <div className="text-left text-neutral-400 text-sm sm:text-base">
-                                                <p className="mb-3 sm:mt-0 mt-6">
-                                                    <span className={`font-bold text-lg sm:text-2xl ${lexend.className}`}>{'Calificación por ' + nickname + ':'}</span>
-                                                </p>
-                                                <p className="mb-1">
-                                                    <span className={`font-bold ${lexend.className}`}>Fecha:</span> {review.review_date}
-                                                </p>
-                                                <p className="">
-                                                    <span className={`font-bold ${lexend.className}`}>Puntuación:</span> {review.rating}
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-5 h-5 sm:w-6 sm:h-6 mb-2 ml-1 inline-block">
-                                                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
-                                                    </svg>
-                                                </p>
-                                                {review.commentary &&
-                                                <p className="mt-2">
-                                                    <span className='text-sm'>{review.commentary}</span>
-                                                </p>
-                                                }
-                                            </div>
-                                        </div>}
+                                    {friend_review &&
+                                        <Review {...friend_review} />
+                                    }
+                                    {me_review &&
+                                        <Review {...me_review} />
+                                    }
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
