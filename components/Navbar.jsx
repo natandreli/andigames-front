@@ -7,7 +7,7 @@ const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 const navigation = [
     { name: 'Inicio', actualPage: 'home', nextPage: '/home' },
-    { name: 'Amigos', actualPage: 'home/friends', nextPage: '/home' },
+    { name: 'Amigos', actualPage: 'home/friends', nextPage: '/home/friends' },
     { name: 'Recomendado', actualPage: 'home/recommended', nextPage: '/home/recommended' },
 ]
 

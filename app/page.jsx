@@ -25,7 +25,7 @@ export default function Home() {
           </span>
         </div>
         <div className="w-full flex items-center">
-          <div className={`sm:text-sm ml-auto text-xs`}>
+          <div className={`text-[10px] sm:text-sm ml-auto min-[380px]:text-xs`}>
             <button
               className="text-white hover:text-blue-400 py-2 px-4 rounded-full mr-2"
               onClick={() => router.push('/login')}
