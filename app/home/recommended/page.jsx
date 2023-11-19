@@ -1,9 +1,9 @@
 "use client";
 
 import { Lexend } from 'next/font/google';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import Game from '@/components/Game';
+import SampleGames from '@/components/SampleGames';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -290,45 +290,34 @@ export default function Home() {
         "Publicación Web"
     ];
 
+    // const [numberOfElements, setNumberOfElements] = useState(7);
+
+    // useEffect(() => {
+    //     window.addEventListener('resize', () => {
+    //         const screenWidth = window.innerWidth;
+
+    //         if (screenWidth >= 1280) {
+    //             setNumberOfElements(7);
+    //         } else if (screenWidth >= 1024) {
+    //             setNumberOfElements(5);
+    //         } else {
+    //             setNumberOfElements(3);
+    //         }
+    //     })
+    // }, [])
+
     return (
         <div className=''>
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
             </div>
             <Navbar actualPage='home/recommended' />
-            <div className='px-10'>
-                <div className="text-left text-neutral-300 text-xl sm:text-2xl group">
-                    <span className={`font-semibold ${lexend.className} group-hover:text-[#2155A5]`}>
-                        Mejor calificados en ANDIGAMES
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="mb-1 w-8 h-8 inline-block fill-neutral-300 group-hover:fill-[#2155A5]">
-                        <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
-                    </svg>
-                </div>
-                <div className='flex items-center justify-center'>
-                    <div className='py-3 grid grid-cols-3 gap-8 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-7'>
-                        {(exampleGames.splice(0, 7)).map((game, index) => (
-                            <div key={game.id} className="relative">
-                                <Game
-                                    title={game.title}
-                                    cover={game.cover}
-                                    genre={game.genre}
-                                    realease_date={game.realease_date}
-                                    publisher={game.publisher}
-                                    developer={game.developer}
-                                    steam_rating={game.steam_rating}
-                                    platform_rating={game.platform_rating}
-                                    url={game.url}
-                                    me_review={game.me_review ? game.me_review : null}
-                                    w={160}
-                                    h={226}
-                                />
-                                <div className="absolute bottom-0 right-0 bg-[#2155A5] text-white text-center w-14 h-14 rounded-tl-lg rounded-br  flex items-center justify-center">
-                                    <p className={`text-3xl font-semibold ${lexend.className} leading-14`}>{index + 1}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+            <div className='px-10 py-4'>
+                <SampleGames title='Mejores calificados en ANDIGAMES' games={exampleGames} useNumbers={true} />
+                <SampleGames title='De acuerdo a tus preferencias' games={exampleGames} />
+                <SampleGames title='Según las personas a las que sigues' games={exampleGames} />
+                <SampleGames title='¡Prueba con algo diferente!' games={exampleGames} />
+                <SampleGames title='Directo de tu lista de deseos' games={exampleGames} />
+                <SampleGames title='Los peores calificados en ANDIGAMES' games={exampleGames} useNumbers={true} />
             </div>
         </div>
     )

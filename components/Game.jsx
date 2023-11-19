@@ -12,15 +12,18 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
     return (
         <div>
             <div className="flex flex-col sm:flex-row items-center h-full w-full">
-                <div className="items-center flex justify-center" style={{ minWidth: '90px', minHeight: '128px' }}>
-                    <button
-                        onClick={() => setOpenModal(true)}>
-                        <Image
+                <div className={`items-center flex justify-center min-w-[50px] min-h-[71px] max-w-[${w}px]`}>
+                    <button onClick={() => setOpenModal(true)}>
+                        <img
                             src={cover}
-                            width={w}
-                            height={h}
                             alt={title}
-                            className="rounded align-middle border-none"
+                            className="rounded align-middle border-none object-cover"
+                            style={{
+                                width: `${w}px`,
+                                height: 'auto',
+                                minWidth: '50px',
+                                minHeight: '71px',
+                            }}
                         />
                     </button>
                 </div>
@@ -51,7 +54,7 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="pb-6 pt-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[710px]">
+                                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[710px]">
                                     <button className="absolute top-4 right-4" onClick={() => setOpenModal(false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
                                             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -60,17 +63,20 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                     <div className="bg-neutral-800 px-4 pt-6 sm:p-6">
                                         <div className="sm:flex sm:items-start style={{ minWidth: '150px', minHeight: '200px' }">
                                             <div className="mx-auto flex h-auto w-auto flex-shrink-0 items-center justify-center sm:mx-0 sm:h-auto sm:w-auto" style={{ minWidth: '150px', minHeight: '200px' }}>
-                                                <Image
+                                                <img
                                                     src={cover}
-                                                    width={200}
-                                                    height={268}
                                                     alt={title}
-                                                    className="rounded align-middle border-none"
-                                                    priority={false}
+                                                    className="rounded align-middle border-none object-cover"
+                                                    style={{
+                                                        width: '200px',
+                                                        height: 'auto',
+                                                        minWidth: '50px',
+                                                        minHeight: '71px',
+                                                    }}
                                                 />
                                             </div>
                                             <div className="mt-5 sm:ml-4 sm:mt-0">
-                                                <Dialog.Title as="h1" className={`text-center sm:text-left mb-4 sm:mb-4 text-xl sm:text-2xl font-bold leading-6 text-white ${lexend.className}`}>
+                                                <Dialog.Title as="h1" className={`text-center sm:text-left mb-4 text-xl sm:text-2xl font-bold leading-6 text-white ${lexend.className}`}>
                                                     {title}
                                                 </Dialog.Title>
                                                 <div className="text-left text-neutral-400 text-sm sm:text-base">
@@ -97,7 +103,7 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-5 h-5 sm:w-6 sm:h-6 mb-2  mx-1 inline-block">
                                                             <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
                                                         </svg>
-                                                        <span className="inline-block text-amber-400 text-sm">(123)</span>
+                                                        <span className="inline-block text-amber-400 text-[10px] sm:text-sm">(123)</span>
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col items-center sm:flex-row sm:items-start mt-4">
