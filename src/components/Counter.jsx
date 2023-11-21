@@ -1,7 +1,6 @@
 import { Lexend } from 'next/font/google';
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import Image from 'next/image';
 import MiniProfileCard from './MiniProfileCard';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })

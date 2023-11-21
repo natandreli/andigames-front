@@ -1,5 +1,4 @@
-import { Lexend, Manrope } from 'next/font/google';
-import Image from 'next/image';
+import { Lexend } from 'next/font/google';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -21,16 +20,18 @@ export default function Awards() {
                         key={index}
                         className='group flex flex-col text-center relative'
                     >
-                        <Image
+                        <img
                             src={award.src}
-                            width={70}
-                            height={70}
                             alt={award.alt}
+                            style={{
+                                width: '70px',
+                                height: 'auto',
+                            }}
                         />
                         <div className="hidden group-hover:block w-fit h-full text-neutral-400 text-xs text-center bg-neutral-900 bg-opacity-75 rounded-md absolute">
                             <div className='flex flex-col items-center justify-center h-full'>
-                            <span className='font-bold block'>Premio:</span>
-                            <span className='block'>{award.alt}</span>
+                                <span className='font-bold block'>Premio:</span>
+                                <span className='block'>{award.alt}</span>
                             </div>
                         </div>
                     </div>

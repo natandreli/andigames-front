@@ -1,23 +1,11 @@
 import { Lexend } from 'next/font/google';
-import { Fragment, useState, useEffect, useRef } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { useState } from 'react'
 import Game from './Game'
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function SampleGames({ title, games, useNumbers = false }) {
     const [openModal, setOpenModal] = useState(false)
-
-    // const scrollContainerRef = useRef(null);
-
-    // const handleScroll = (scrollOffset) => {
-    //     if (scrollContainerRef.current) {
-    //         scrollContainerRef.current.scrollTo({
-    //             left: scrollContainerRef.current.scrollLeft + scrollOffset,
-    //             behavior: 'smooth'
-    //         });
-    //     }
-    // };
 
     return (
         <div className='mt-4'>

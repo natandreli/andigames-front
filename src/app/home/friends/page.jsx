@@ -3,7 +3,7 @@
 import { Lexend } from 'next/font/google';
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import SampleGames from '@/components/SampleGames';
+import ActivityCard from '@/components/ActivityCard';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -17,6 +17,12 @@ export default function Home() {
         setSearchValue(value);
         setShowActivity(value === '');
     };
+
+    const reviewData = {
+        gameTitle: 'Nombre del Juego',
+        content: 'Esta es una reseña sobre el juego. Me gustó mucho...',
+        rating: 4, // La calificación del juego
+      };
 
     return (
         <div className=''>
@@ -47,6 +53,7 @@ export default function Home() {
             <div className='px-10 py-4'>
                 {showActivity && (
                     <div>
+                        <ActivityCard {...reviewData} />
                     </div>
                 )}
             </div>

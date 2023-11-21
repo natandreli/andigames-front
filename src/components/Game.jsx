@@ -1,12 +1,11 @@
 import { Lexend } from 'next/font/google';
-import Image from 'next/image';
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Review from './Review';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, me_review = null, friend_review = null, w = 120, h = 170 }) {
+export default function Game({ title, cover, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, me_review = null, friend_review = null, in_wish_list = true, w = 120, h = 170 }) {
     const [openModal, setOpenModal] = useState(false)
 
     return (
@@ -54,7 +53,7 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[710px]">
+                                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[725px]">
                                     <button className="absolute top-4 right-4" onClick={() => setOpenModal(false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
                                             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -120,10 +119,10 @@ export default function Game({ title, cover, genre, realease_date, publisher, de
                                                         Ir a la tienda
                                                     </button>
                                                     <button
-                                                        className="inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
+                                                        className={`mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md px-3 py-2 text-xs border border-neutral-400 ${in_wish_list ? 'bg-neutral-400 text-neutral-700 font-semibold hover:bg-neutral-300' : 'text-neutral-400 bg-neutral-800 hover:bg-neutral-700'}`}
                                                         onClick={() => handleAddToWishlist()}
                                                     >
-                                                        Agregar a mi lista de deseos
+                                                        {in_wish_list ? 'Quitar de mi lista de deseos' : 'Añadir a mi lista de deseos'}
                                                     </button>
                                                 </div>
                                             </div>

@@ -6,11 +6,13 @@ import Navbar from '@/components/Navbar';
 import ProfileCardFriend from '@/components/ProfileCardFriend';
 import Awards from '@/components/Awards';
 import Game from '@/components/Game';
+import { useParams } from 'next/navigation';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
 
+    
     const exampleGames = [
         {
             id: 1,

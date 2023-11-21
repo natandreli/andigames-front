@@ -1,7 +1,6 @@
 import { Lexend } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Counter from '@/components/Counter';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] });
 
