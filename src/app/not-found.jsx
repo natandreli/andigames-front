@@ -2,6 +2,7 @@
 
 import { Lexend } from 'next/font/google';
 import { useRouter } from 'next/navigation';
+import Particle from '@/components/Particle';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] });
 
@@ -10,6 +11,7 @@ export default function NotFound() {
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen'>
+            <Particle />
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
                 <nav className="items-center justify-between p-7 pl-10 pr-10 w-full">
                     <div className="flex items-center flex-shrink-0 text-white mr-6">

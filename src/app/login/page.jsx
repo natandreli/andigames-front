@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { Lexend, Manrope } from 'next/font/google';
+import { Lexend } from 'next/font/google';
+import Particle from '@/components/Particle';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -15,6 +16,7 @@ export default function Home() {
 
     return (
         <div className=''>
+            <Particle />
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
             </div>
             <nav className="items-center justify-between p-7 pl-10 pr-10 w-full">

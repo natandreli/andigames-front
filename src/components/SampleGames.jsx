@@ -25,7 +25,7 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                         </svg>
                     </button>
                 </div> */}
-                <div className='pt-4 pb-2 overflow-x-auto'> {/* ref={scrollContainerRef}>  */}
+                <div className='pt-6 pb-2 overflow-x-auto mx-[50px] md:mx-[50px] lg:mx-[70px]'> {/* ref={scrollContainerRef}>  */}
                     <div className='flex flex-nowrap gap-3 md:gap-6 lg:gap-8'>
                         {games.map((game, index) => (
                             <div key={game.id} className="relative" style={{ minWidth: '130px' }}>
@@ -44,7 +44,7 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                                     h={184}
                                 />
                                 {useNumbers && (
-                                    <div className="font-bold absolute top-0 right-0 bg-[#fbbf24] text-neutral-900 text-center sm:w-11 sm:h-11 w-9 h-9 rounded-tr rounded-bl-lg flex items-center justify-center">
+                                    <div className="font-bold absolute top-0 right-0 bg-amber-300 text-neutral-900 text-center sm:w-11 sm:h-11 w-9 h-9 rounded-tr rounded-bl-lg flex items-center justify-center">
                                         <p className={`sm:text-2xl text-lg font-semibold leading-14`}>{index + 1}</p>
                                     </div>
                                 )}

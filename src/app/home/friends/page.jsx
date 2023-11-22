@@ -4,6 +4,7 @@ import { Lexend } from 'next/font/google';
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ActivityCard from '@/components/ActivityCard';
+import Particle from '@/components/Particle';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -26,6 +27,7 @@ export default function Home() {
 
     return (
         <div className=''>
+            <Particle />
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
             </div>
             <Navbar actualPage='home/friends' />

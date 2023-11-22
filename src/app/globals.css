@@ -17,10 +17,11 @@
 }
 
 body {
-  /*background-image: url('../public/pexels-francesco-ungaro-998641.jpg'); */
-  background-image: url('../public/pexels-jeremy-müller-7538746.jpg');
+  /* background-image: url('../../public/pexels-francesco-ungaro-998641.jpg');
+  background-image: url('../../public/pexels-jeremy-müller-7538746.jpg');
   background-size: cover; 
   background-repeat: no-repeat; 
-  background-attachment: fixed; 
+  background-attachment: fixed;  */
+  background-color: #171717;
   user-select: none;
 }

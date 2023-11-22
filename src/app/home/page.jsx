@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import ProfileCard from '@/components/ProfileCard';
 import Awards from '@/components/Awards';
 import Game from '@/components/Game';
+import Particle from '@/components/Particle';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -436,6 +437,7 @@ export default function Home() {
 
     return (
         <div className=''>
+            <Particle />
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
             </div>
             <Navbar actualPage='home' />
@@ -584,8 +586,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='flex items-center justify-center'>
-                <div className='px-10 py-3 grid grid-cols-3 gap-6 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9'>
+            <div className='px-10 py-3 mb-6'>
+                <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
                     {exampleGames.map((game) => (
                         <Game
                             key={game.id}
