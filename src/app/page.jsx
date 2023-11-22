@@ -35,13 +35,16 @@ export default function Home() {
       <Particle />
       <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
       </div>
-      <nav className="flex items-center justify-between p-6 pl-10 pr-10 w-full">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <nav className="flex items-center justify-between px-6 md:px-10 py-6 w-full">
+        <div className="flex items-center flex-shrink-0 text-white">
           <span className={`font-bold sm:text-lg text-xs tracking-tight ${lexend.className}`}>
             <button
               onClick={() => router.push('/')}
             >
-              ANDIGAMES
+              <img src='/AndiGamesLogo-white-big-letters.png'
+                alt='AndiGames Logo'
+                className={`mt-1 w-[120px] sm:w-[160px] md:w-[200px] min-w-[50px] h-auto`}>
+              </img>
             </button>
           </span>
         </div>

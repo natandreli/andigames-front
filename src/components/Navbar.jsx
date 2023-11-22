@@ -39,9 +39,16 @@ export default function Navbar({ actualPage = '' }) {
                             </div>
                             <div className="flex flex-1 items-center justify-center  sm:justify-start">
                                 <div className="flex items-center flex-shrink-0 text-white">
-                                    <span className={`text-white font-bold sm:text-lg text-xs tracking-tight ${lexend.className}`}>
+                                    {/* <span className={`text-white font-bold sm:text-lg text-xs tracking-tight ${lexend.className}`}>
                                         ANDIGAMES
-                                    </span>
+                                    </span> */}
+                                    <img src='/AndiGamesLogo-white-big-letters.png'
+                                        alt='AndiGames Logo'
+                                        style={{
+                                            width: '170px',
+                                            height: 'auto',
+                                        }}>
+                                    </img>
                                 </div>
                                 <div className="flex items-center justify-center hidden sm:ml-6 sm:block">
                                     <div className="flex text-center space-x-4 text-xs lg:text-sm font-semibold items-center justify-center">
