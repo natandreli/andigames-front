@@ -5,7 +5,7 @@ import Counter from '@/components/Counter';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function ProfileCard({ photo, games, following, followers, nickname, username, description }) {
+export default function ProfileCard({ photo, reviews, following, followers, nickname, username, description }) {
     const router =  useRouter();
 
     return (
@@ -20,7 +20,7 @@ export default function ProfileCard({ photo, games, following, followers, nickna
                 />
             </div>
             <div className="justify-center flex flex-col">
-                <Counter games={games} following={following} followers={followers} />
+                <Counter reviews={reviews} following={following} followers={followers} />
                 <span className={`font-bold text-white text-sm lg:text-xl ${lexend.className}`}>
                     {nickname}
                     <button
