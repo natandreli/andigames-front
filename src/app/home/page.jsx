@@ -175,9 +175,9 @@ export default function Home() {
                             <li className="mr-4 mb-2">
                                 <button
                                     className={`${isButtonGamesDisabled
-                                        ? 'text-neutral-400 cursor-not-allowed border-neutral-400 font-bold'
-                                        : 'text-white border-transparent hover:text-blue-600 hover:border-blue-600'
-                                        }  p-2 border-b-4`}
+                                        ? 'text-[#7313FE] cursor-not-allowed border-[#7313FE] font-bold'
+                                        : 'text-neutral-400 border-transparent hover:text-white hover:border-white'
+                                        }  p-2 border-b-2`}
                                     onClick={handleButtonGamesClick}
                                     disabled={isButtonGamesDisabled}
                                 >
@@ -187,9 +187,9 @@ export default function Home() {
                             <li className="mb-2">
                                 <button
                                     className={`${isButtonWishListDisabled
-                                        ? 'text-neutral-400 cursor-not-allowed border-neutral-400 font-bold'
-                                        : 'text-white border-transparent hover:text-blue-600 hover:border-blue-600'
-                                        }  p-2 border-b-4`}
+                                        ? 'text-[#7313FE] cursor-not-allowed border-[#7313FE] font-bold'
+                                        : 'text-neutral-400 border-transparent hover:text-white hover:border-white'
+                                        }  p-2 border-b-2`}
                                     onClick={handleButtonWishListClick}
                                     disabled={isButtonWishListDisabled}
                                 >
