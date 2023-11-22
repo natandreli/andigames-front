@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 const navigation = [
-    { name: 'Inicio', actualPage: 'home', nextPage: '/home' },
     { name: 'Amigos', actualPage: 'home/friends', nextPage: '/home/friends' },
     { name: 'Recomendado', actualPage: 'home/recommended', nextPage: '/home/recommended' },
 ]
@@ -44,10 +43,9 @@ export default function Navbar({ actualPage = '' }) {
                                     </span> */}
                                     <img src='/AndiGamesLogo-white-big-letters.png'
                                         alt='AndiGames Logo'
-                                        style={{
-                                            width: '170px',
-                                            height: 'auto',
-                                        }}>
+                                        className={`w-[170px] h-auto hover:cursor-pointer hover:opacity-70`}
+                                        onClick={() => router.push('/home')}
+                                        >
                                     </img>
                                 </div>
                                 <div className="flex items-center justify-center hidden sm:ml-6 sm:block">
@@ -56,7 +54,7 @@ export default function Navbar({ actualPage = '' }) {
                                             <a
                                                 key={item.name}
                                                 className={classNames(
-                                                    actualPage === item.actualPage ? "text-neutral-600 cursor-not-allowed" : "text-white hover:text-blue-600 cursor-pointer"
+                                                    actualPage === item.actualPage ? "text-neutral-600 cursor-not-allowed" : "text-white hover:text-[#6400FF] cursor-pointer"
                                                 )}
                                                 onClick={() => router.push(item.nextPage)}
                                             >

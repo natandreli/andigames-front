@@ -25,7 +25,7 @@ export default function Particle() {
                         }
                     },
                     "color": {
-                        "value": "#fcd34d"
+                        "value": "#5CFFFF"
                     },
                     "shape": {
                         "type": "star",
@@ -66,7 +66,7 @@ export default function Particle() {
                     "line_linked": {
                         "enable": true,
                         "distance": 600,
-                        "color": "#fdba74",
+                        "color": "#005EC1",
                         "opacity": 0.4,
                         "width": 2
                     },
