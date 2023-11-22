@@ -1,11 +1,9 @@
 import { Lexend } from 'next/font/google';
-import { useState } from 'react'
 import Game from './Game'
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function SampleGames({ title, games, useNumbers = false }) {
-    const [openModal, setOpenModal] = useState(false)
 
     return (
         <div className='mt-4'>
@@ -15,17 +13,7 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                 </span>
             </div>
             <div className='flex items-center justify-center'>
-                {/* <div className='flex items-center'>
-                    <button
-                        className="absolute left-0 top-0 bottom-0 pr-1 bg-gray-200 hover:bg-gray-300 rounded opacity-50 transition-opacity duration-300 focus:outline-none"
-                        onClick={() => handleScroll(-540)}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                            <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
-                        </svg>
-                    </button>
-                </div> */}
-                <div className='pt-6 pb-2 overflow-x-auto mx-[50px] md:mx-[50px] lg:mx-[70px]'> {/* ref={scrollContainerRef}>  */}
+                <div className='pt-6 pb-2 overflow-x-auto mx-[25px] md:mx-[50px] lg:mx-[70px]'>
                     <div className='flex flex-nowrap gap-3 md:gap-6 lg:gap-8'>
                         {games.map((game, index) => (
                             <div key={game.id} className="relative" style={{ minWidth: '130px' }}>
@@ -52,16 +40,6 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                         ))}
                     </div>
                 </div>
-                {/* <div className='flex items-center'>
-                    <button
-                        className="pl-1 bg-gray-200 hover:bg-gray-300 rounded"
-                        onClick={() => handleScroll(540)}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                            <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
-                        </svg>
-                    </button>
-                </div> */}
             </div>
         </div>
     );

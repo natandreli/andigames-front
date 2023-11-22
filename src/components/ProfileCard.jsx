@@ -12,7 +12,7 @@ export default function ProfileCard({ photo, games, following, followers, nickna
         <div className="flex flex-col sm:flex-row items-center h-full w-full">
             <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '150px', minHeight: '150px' }}>
                 <Image
-                    src={photo}
+                    src={photo ? photo : '/profile-default.png'}
                     width={110}
                     height={110}
                     alt="Profile picture"

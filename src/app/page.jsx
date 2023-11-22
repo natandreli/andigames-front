@@ -15,6 +15,13 @@ export default function Home() {
   const [openModalLogin, setOpenModalLogin] = useState(false)
   const [openModalSingup, setOpenModalSingup] = useState(false)
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   function handleLogin() {
     router.push('/home');
   }
@@ -91,7 +98,7 @@ export default function Home() {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[725px]">
+                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:m-8 w-xl sm:w-full sm:max-w-[725px]">
                   <button className="absolute top-4 right-4" onClick={() => setOpenModalLogin(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
                       <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -109,7 +116,7 @@ export default function Home() {
                               ¡Ingresa para jugar, calificar y conectar!
                             </h2>
                           </div>
-                          <div className="w-full max-w-md items-center justify-center bg-neutral-800 rounded px-6 md:px-8 lg:px-10 py-10">
+                          <div className="w-full max-w-md text-xs sm:text-sm items-center justify-center bg-neutral-800 rounded px-6 md:px-8 lg:px-10 py-10">
                             <div className="mb-4">
                               <label className="block text-neutral-400 text-sm font-bold mb-2">
                                 Usuario <span className="text-red-500">*</span>
@@ -117,12 +124,36 @@ export default function Home() {
                               <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Ingresa tu nombre de usuario"></input>
                             </div>
                             <div className="mb-9">
-                              <div className="flex items-center justify-between mb-2">
-                                <label className="block text-neutral-400 text-sm font-bold">
-                                  Contraseña <span className="text-red-500">*</span>
-                                </label>
+                              <label className="block text-neutral-400 text-sm font-bold mb-2">
+                                Contraseña <span className="text-red-500">*</span>
+                              </label>
+                              <div className="relative">
+                                <input
+                                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                  id="password"
+                                  type={showPassword ? 'text' : 'password'}
+                                  placeholder="Ingresa una contraseña"
+                                  value={password}
+                                  onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <button
+                                  type="button"
+                                  className="absolute inset-y-0 right-0 px-3 py-2 bg-transparent"
+                                  onClick={handleTogglePassword}
+                                >
+                                  {showPassword ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="w-4 h-4 sm:w-5 sm:h-5 fill-neutral-500">
+                                      <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                                      <path fillRule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                                    </svg>
+                                  ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="w-4 h-4 sm:w-5 sm:h-5 fill-neutral-500">
+                                      <path fillRule="evenodd" d="M3.28 2.22a.75.75 0 00-1.06 1.06l14.5 14.5a.75.75 0 101.06-1.06l-1.745-1.745a10.029 10.029 0 003.3-4.38 1.651 1.651 0 000-1.185A10.004 10.004 0 009.999 3a9.956 9.956 0 00-4.744 1.194L3.28 2.22zM7.752 6.69l1.092 1.092a2.5 2.5 0 013.374 3.373l1.091 1.092a4 4 0 00-5.557-5.557z" clipRule="evenodd" />
+                                      <path d="M10.748 13.93l2.523 2.523a9.987 9.987 0 01-3.27.547c-4.258 0-7.894-2.66-9.337-6.41a1.651 1.651 0 010-1.186A10.007 10.007 0 012.839 6.02L6.07 9.252a4 4 0 004.678 4.678z" />
+                                    </svg>
+                                  )}
+                                </button>
                               </div>
-                              <input className="mb-1 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Ingresa tu contraseña"></input>
                             </div>
                             <div className="mb-4">
                               <button
@@ -181,7 +212,7 @@ export default function Home() {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="pt-4 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[725px]">
+                <Dialog.Panel className="pt-4 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:m-8 w-xl sm:w-full sm:max-w-[725px]">
                   <button className="absolute top-4 right-4" onClick={() => setOpenModalSingup(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
                       <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -199,7 +230,7 @@ export default function Home() {
                               ¡Regístrate para jugar, calificar y conectar!
                             </h2>
                           </div>
-                          <div className="w-full max-w-md items-center justify-center bg-neutral-800 rounded px-6 md:px-8 lg:px-10 py-10">
+                          <div className="w-full max-w-md items-center text-xs sm:text-sm justify-center bg-neutral-800 rounded px-6 md:px-8 lg:px-10 py-10">
                             <div className="mb-4">
                               <label className="block text-neutral-400 text-sm font-bold mb-2">
                                 Correo electrónico <span className="text-red-500">*</span>
@@ -222,13 +253,33 @@ export default function Home() {
                               <label className="block text-neutral-400 text-sm font-bold mb-2">
                                 Contraseña <span className="text-red-500">*</span>
                               </label>
-                              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Ingresa una contraseña"></input>
-                            </div>
-                            <div className="mb-4">
-                              <label className="block text-neutral-400 text-sm font-bold mb-2">
-                                Contraseña <span className="text-red-500">*</span>
-                              </label>
-                              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password2" type="password" placeholder="Ingresa nuevamente la contraseña"></input>
+                              <div className="relative">
+                                <input
+                                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                  id="password"
+                                  type={showPassword ? 'text' : 'password'}
+                                  placeholder="Ingresa una contraseña"
+                                  value={password}
+                                  onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <button
+                                  type="button"
+                                  className="absolute inset-y-0 right-0 px-3 py-2 bg-transparent"
+                                  onClick={handleTogglePassword}
+                                >
+                                  {showPassword ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="w-4 h-4 sm:w-5 sm:h-5 fill-neutral-500">
+                                      <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                                      <path fillRule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                                    </svg>
+                                  ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="w-4 h-4 sm:w-5 sm:h-5 fill-neutral-500">
+                                      <path fillRule="evenodd" d="M3.28 2.22a.75.75 0 00-1.06 1.06l14.5 14.5a.75.75 0 101.06-1.06l-1.745-1.745a10.029 10.029 0 003.3-4.38 1.651 1.651 0 000-1.185A10.004 10.004 0 009.999 3a9.956 9.956 0 00-4.744 1.194L3.28 2.22zM7.752 6.69l1.092 1.092a2.5 2.5 0 013.374 3.373l1.091 1.092a4 4 0 00-5.557-5.557z" clipRule="evenodd" />
+                                      <path d="M10.748 13.93l2.523 2.523a9.987 9.987 0 01-3.27.547c-4.258 0-7.894-2.66-9.337-6.41a1.651 1.651 0 010-1.186A10.007 10.007 0 012.839 6.02L6.07 9.252a4 4 0 004.678 4.678z" />
+                                    </svg>
+                                  )}
+                                </button>
+                              </div>
                             </div>
                             <div className="mb-4">
                               <label className="block text-neutral-400 text-sm font-bold mb-2">
@@ -271,7 +322,7 @@ export default function Home() {
                             <div className="">
                               <button
                                 className="w-full text-xs sm:text-sm hover:text-blue-400 text-blue-600 rounded"
-                                onClick={() =>{
+                                onClick={() => {
                                   setOpenModalLogin(true)
                                   setOpenModalSingup(false)
                                 }}
@@ -290,6 +341,6 @@ export default function Home() {
           </div>
         </Dialog>
       </Transition.Root>
-    </div>
+    </div >
   )
 }

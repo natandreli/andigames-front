@@ -5,14 +5,14 @@ import Counter from '@/components/Counter';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function ProfileCard({ photo, games, following, followers, nickname, username, description }) {
+export default function ProfileCard({ photo, reviews, following, followers, nickname, username, description }) {
     const router = useRouter();
 
     return (
         <div className="flex flex-col sm:flex-row items-center h-full w-full">
             <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '150px', minHeight: '150px' }}>
                 <Image
-                    src={photo}
+                    src={photo ? photo : '/profile-default.png'}
                     width={110}
                     height={110}
                     alt="Profile picture"
@@ -20,7 +20,11 @@ export default function ProfileCard({ photo, games, following, followers, nickna
                 />
             </div>
             <div className="justify-center flex flex-col">
-                <Counter games={games} following={following} followers={followers} />
+                <Counter
+                    reviews={reviews}
+                    following={following}
+                    followers={followers} 
+                />
                 <span className={`font-bold text-white text-sm lg:text-xl ${lexend.className}`}>
                     {nickname}
                 </span>

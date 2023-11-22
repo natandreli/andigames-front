@@ -15,7 +15,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar({ actualPage }) {
+export default function Navbar({ actualPage = '' }) {
 
     const router = useRouter();
 

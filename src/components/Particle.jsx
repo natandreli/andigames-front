@@ -18,7 +18,7 @@ export default function Particle() {
                 },
                 "particles": {
                     "number": {
-                        "value": 20,
+                        "value": 10,
                         "density": {
                             "enable": false,
                             "value_area": 800
