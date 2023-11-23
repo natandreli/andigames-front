@@ -57,7 +57,7 @@ export default function Home() {
               Inicia sesión
             </button>
             <button
-              className="bg-white hover:bg-blue-800 text-neutral-700 hover:text-white py-2 px-4 rounded-full"
+              className="bg-white hover:bg-[#A61145] text-neutral-700 hover:text-white py-2 px-4 rounded-full"
               onClick={() => setOpenModalSingup(true)}
             >
               Regístrate
@@ -69,7 +69,7 @@ export default function Home() {
         <h1 className={`font-bold text-2xl sm:text-4xl text-center text-white sm:leading-tight ${lexend.className}`}>Juega, califica y conecta: Tu plataforma para compartir tu experiencia gamer</h1>
         <h2 className={`font-light text-base sm:text-lg mt-7 sm:px-[100px] text-center text-white sm:leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
         <button
-          className="m-auto mt-10 bg-blue-800 hover:bg-blue-600 text-white px-10 py-3 rounded-full"
+          className="m-auto mt-10 bg-[#6500E1] hover:bg-[#751DE2] text-white px-10 py-3 rounded-full"
           onClick={() => setOpenModalSingup(true)}
         >
           Comenzar
@@ -160,7 +160,7 @@ export default function Home() {
                             </div>
                             <div className="mb-4">
                               <button
-                                className="w-full bg-blue-800 hover:bg-blue-600 text-white font-base py-2 px-4 rounded"
+                                className="w-full bg-[#6500E1] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
                                 onClick={() =>
                                   handleLogin()}
                               >
@@ -169,7 +169,7 @@ export default function Home() {
                             </div>
                             <div className="">
                               <button
-                                className="w-full text-xs sm:text-sm hover:text-blue-400 text-blue-600 rounded"
+                                className="w-full text-xs sm:text-sm hover:text-[#FF5B94] text-neutral-400 rounded"
                                 onClick={() => {
                                   setOpenModalSingup(true)
                                   setOpenModalLogin(false)
@@ -315,7 +315,7 @@ export default function Home() {
                             </div> */}
                             <div className="mb-4">
                               <button
-                                className="w-full bg-blue-800 hover:bg-blue-600 text-white font-base py-2 px-4 rounded"
+                                className="w-full bg-[#6500E1] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
                                 onClick={() =>
                                   handleSignup()}
                               >
@@ -324,7 +324,7 @@ export default function Home() {
                             </div>
                             <div className="">
                               <button
-                                className="w-full text-xs sm:text-sm hover:text-blue-400 text-blue-600 rounded"
+                                className="w-full text-xs sm:text-sm hover:text-[#FF5B94] text-neutral-400 rounded"
                                 onClick={() => {
                                   setOpenModalLogin(true)
                                   setOpenModalSingup(false)
