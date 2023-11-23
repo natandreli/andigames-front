@@ -1,14 +1,14 @@
 import './globals.css'
 import { Roboto, Lato } from 'next/font/google'
- 
+
 const roboto = Roboto({
-  weight:  ['100', '300', '400', '500', '700', '900'],
+  weight: ['100', '300', '400', '500', '700', '900'],
   subsets: ['latin'],
   display: 'swap',
 })
 
 const lato = Lato({
-  weight:  ['100', '300', '400', '700', '900'],
+  weight: ['100', '300', '400', '700', '900'],
   subsets: ['latin'],
   display: 'swap',
 })
@@ -21,6 +21,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/_next/static/css/app/loading.css?v=1700756696416" as='style'/>
+      </head>
       <body className={lato.className}>{children}</body>
     </html>
   )
