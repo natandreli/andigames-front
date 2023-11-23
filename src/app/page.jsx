@@ -305,14 +305,6 @@ export default function Home() {
                                 </div>
                               </div>
                             </div>
-                            {/* <div className="mb-9">
-                              <label className="block text-neutral-400 text-sm">
-                                <input className="mr-2 accent-blue-800" type="checkbox"></input>
-                                <span>
-                                  Estoy de acuerdo con los términos y condiciones <span className="text-red-500">*</span>
-                                </span>
-                              </label>
-                            </div> */}
                             <div className="mb-4">
                               <button
                                 className="w-full bg-[#6500E1] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"

@@ -1,7 +1,7 @@
 "use client";
 
 import { Lexend } from 'next/font/google';
-import Particle from '@/components/Particle';
+import Image from 'next/image';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] });
 
@@ -31,9 +31,13 @@ export default function Loading() {
                     <h1 className={`font-bold text-2xl sm:text-4xl text-center text-white leading-tight ${lexend.className}`}>
                         Cargando...
                     </h1>
-                    <img src='/AndiGamesLogo-disk.png'
+                    <Image 
+                        src='/AndiGamesLogo-disk.png'
                         alt='AndiGames Logo'
-                        className={`my-5 inline-block w-[100px] h-auto animate-spin`}
+                        width={100}
+                        height={100}
+                        className={`my-5 inline-block animate-spin`}
+                        priority={true}
                     />
                 </div>
             </div>
