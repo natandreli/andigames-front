@@ -7,7 +7,7 @@ export default function SampleGames({ title, games, useNumbers = false }) {
 
     return (
         <div className='mt-4'>
-            <div className="text-left text-neutral-300 text-sm [376px]:text-md sm:text-2xl">
+            <div className="text-left text-neutral-300 text-base sm:text-2xl">
                 <span className={`font-semibold ${lexend.className}`}>
                     {title}
                 </span>

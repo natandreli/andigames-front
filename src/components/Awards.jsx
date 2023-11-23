@@ -11,7 +11,7 @@ export default function Awards() {
 
     return (
         <div className='flex flex-col w-full'>
-            <span className={`font-bold text-white text-[10px] lg:text-sm ${lexend.className}`}>
+            <span className={`font-bold text-white text-base lg:text-lg ${lexend.className}`}>
                 Reconocimientos
             </span>
             <div className='grid grid-cols-5 gap-2 px-6 items-center mt-2 w-auto h-40 bg-neutral-900 bg-opacity-90'>

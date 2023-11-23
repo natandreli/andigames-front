@@ -26,7 +26,7 @@ export default function Navbar({ actualPage = '' }) {
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-neutral-700 hover:bg-opacity-50  hover:text-white focus:outline-none">
+                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-neutral-700 hover:bg-opacity-50 hover:text-white focus:outline-none">
                                     <span className="absolute -inset-0.5" />
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -38,9 +38,6 @@ export default function Navbar({ actualPage = '' }) {
                             </div>
                             <div className="flex flex-1 items-center justify-center  sm:justify-start">
                                 <div className="flex items-center flex-shrink-0 text-white">
-                                    {/* <span className={`text-white font-bold sm:text-lg text-xs tracking-tight ${lexend.className}`}>
-                                        ANDIGAMES
-                                    </span> */}
                                     <img src='/AndiGamesLogo-white-big-letters.png'
                                         alt='AndiGames Logo'
                                         className={`w-[170px] h-auto hover:cursor-pointer hover:opacity-70`}
@@ -76,9 +73,9 @@ export default function Navbar({ actualPage = '' }) {
                                     as="a"
                                     className={classNames(
                                         item.actualPage === actualPage
-                                            ? 'bg-neutral-700 bg-opacity-50 text-neutral-400'
-                                            : 'text-white hover:bg-blue-600 hover:text-white',
-                                        'block rounded-md  mx-11 px-3 py-2 text-xs font-semibold'
+                                            ? 'bg-[#5CFFFF] bg-opacity-10 text-white'
+                                            : 'text-white hover:bg-[#5CFFFF] hover:bg-opacity-20',
+                                        'block rounded-md mx-11 px-3 py-2 text-xs font-semibold'
                                     )}
                                     onClick={() => router.push(item.nextPage)}
                                 >

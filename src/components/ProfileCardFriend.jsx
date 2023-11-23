@@ -25,13 +25,13 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
                     following={following}
                     followers={followers} 
                 />
-                <span className={`font-bold text-white text-sm lg:text-xl ${lexend.className}`}>
+                <span className={`font-bold text-white text-lg lg:text-3xl ${lexend.className}`}>
                     {nickname}
                 </span>
-                <span className={`font-bold text-neutral-400 text-[10px] lg:text-sm ${lexend.className}`}>
+                <span className={`font-bold text-[#305761] text-sm lg:text-base ${lexend.className}`}>
                     {'@' + username}
                 </span>
-                <span className="mt-2 text-neutral-300 text-[10px] lg:text-sm">
+                <span className="mt-2 text-neutral-300 text-sm lg:text-base">
                     {description ? description : 'No hay descripción'}
                 </span>
                 <button className="mt-4 items-center justify-center text-center px-2 lg:px-3 py-1 sm:text-sm inline-flex sm:w-24 justify-center rounded-md bg-neutral-900 text-[10px] text-neutral-400 border border-neutral-400 hover:bg-neutral-700">
