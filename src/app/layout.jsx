@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="/_next/static/css/app/loading.css?v=1700756696416" as='style'/>
       </head>
       <body className={lato.className}>{children}</body>
     </html>

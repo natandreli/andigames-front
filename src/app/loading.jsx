@@ -37,6 +37,7 @@ export default function Loading() {
                         width={100}
                         height={100}
                         className={`my-5 inline-block animate-spin`}
+                        priority={true}
                     />
                 </div>
             </div>
