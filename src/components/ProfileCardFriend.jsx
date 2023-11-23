@@ -17,6 +17,7 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
                     height={110}
                     alt="Profile picture"
                     className="rounded-full align-middle border-none max-w-3/4"
+                    priority={true}
                 />
             </div>
             <div className="justify-center flex flex-col">

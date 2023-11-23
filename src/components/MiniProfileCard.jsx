@@ -16,6 +16,7 @@ export default function MiniProfileCard({ photo, reviews, nickname, username }) 
                     height={40}
                     alt="Profile picture"
                     className="rounded-full align-middle border-none"
+                    priority={true}
                 />
             </div>
             <div className="flex flex-col">
