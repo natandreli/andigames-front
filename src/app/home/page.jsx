@@ -169,7 +169,7 @@ export default function Home() {
                 <Awards />
             </div>
             <div className={``}>
-                <nav className="flex items-center sm:py-6 px-10 w-full">
+                <nav className="flex items-center sm:py-6 px-10 xl:px-14 w-full">
                     <div className="block text-[10px] lg:text-sm">
                         <ul className="flex">
                             <li className="mr-4 mb-2">
@@ -200,7 +200,7 @@ export default function Home() {
                     </div>
                 </nav>
             </div>
-            <div className="flex flex-wrap items-center sm:py-2 px-10 w-full sm:mt-0 mt-4">
+            <div className="flex flex-wrap items-center sm:py-2 px-10 xl:px-14 w-full sm:mt-0 mt-4">
                 {!showWishList &&
                     <div className="block text-xs xl:text-sm text-neutral-500">
                         <ul className="flex flex-wrap">
