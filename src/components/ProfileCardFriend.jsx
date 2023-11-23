@@ -34,7 +34,7 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
                 <span className="mt-2 text-neutral-300 text-sm lg:text-base">
                     {description ? description : 'No hay descripción'}
                 </span>
-                <button className="mt-4 items-center justify-center text-center px-2 lg:px-3 py-1 sm:text-sm inline-flex sm:w-24 justify-center rounded-md bg-neutral-900 text-[10px] text-neutral-400 border border-neutral-400 hover:bg-neutral-700">
+                <button className="mt-4 items-center justify-center text-center px-2 lg:px-3 py-1 text-sm sm:text-base inline-flex sm:w-24 justify-center rounded-md bg-[#305761] bg-opacity-5 text-neutral-300 border-2 border-[#305761] hover:bg-[#305761] hover:bg-opacity-20">
                     Seguir
                 </button>
             </div>
