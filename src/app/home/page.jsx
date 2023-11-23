@@ -156,7 +156,7 @@ export default function Home() {
             <div className='fixed -z-10 h-screen w-screen bg-center bg-neutral-900 bg-opacity-70'>
             </div>
             <Navbar />
-            <div className={`grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 w-screen justify-center items-center py-2 px-10`}>
+            <div className={`grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 w-screen justify-center items-center py-2 px-10 xl:px-20`}>
                 <ProfileCard
                     photo={null}
                     reviews={user.reviews}
@@ -169,7 +169,7 @@ export default function Home() {
                 <Awards />
             </div>
             <div className={``}>
-                <nav className="flex items-center sm:py-6 px-10 xl:px-14 w-full">
+                <nav className="flex items-center sm:py-6 px-10 xl:px-20 w-full">
                     <div className="block text-[10px] lg:text-sm">
                         <ul className="flex">
                             <li className="mr-4 mb-2">
@@ -200,7 +200,7 @@ export default function Home() {
                     </div>
                 </nav>
             </div>
-            <div className="flex flex-wrap items-center sm:py-2 px-10 xl:px-14 w-full sm:mt-0 mt-4">
+            <div className="flex flex-wrap items-center sm:py-2 px-10 xl:px-20 w-full sm:mt-0 mt-4">
                 {!showWishList &&
                     <div className="block text-xs xl:text-sm text-neutral-500">
                         <ul className="flex flex-wrap">
