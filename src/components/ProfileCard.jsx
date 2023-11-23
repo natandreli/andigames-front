@@ -21,7 +21,7 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
             </div>
             <div className="justify-center flex flex-col">
                 <Counter reviews={reviews} following={following} followers={followers} />
-                <span className={`font-bold text-white text-sm lg:text-xl ${lexend.className}`}>
+                <span className={`font-bold text-white text-base lg:text-2xl ${lexend.className}`}>
                     {nickname}
                     <button
                     onClick={() => router.push('/home/adjustments')}>
@@ -30,7 +30,7 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
                         </svg>
                     </button>
                 </span>
-                <span className={`font-bold text-neutral-400 text-[10px] lg:text-sm ${lexend.className}`}>
+                <span className={`font-bold text-[#305761] text-[10px] lg:text-sm ${lexend.className}`}>
                     {'@' + username}
                 </span>
                 <span className="mt-2 text-neutral-300 text-[10px] lg:text-sm">

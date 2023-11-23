@@ -208,8 +208,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonAllDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonAllClick}
                                     disabled={isButtonAllDisabled}
                                 >
@@ -220,8 +220,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonLoveDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonLoveClick}
                                     disabled={isButtonLoveDisabled}
                                 >
@@ -232,8 +232,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonLikeDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonLikeClick}
                                     disabled={isButtonLikeDisabled}
                                 >
@@ -244,8 +244,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonMehDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonMehClick}
                                     disabled={isButtonMehDisabled}
                                 >
@@ -256,8 +256,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonDislikeDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonDislikeClick}
                                     disabled={isButtonDislikeDisabled}
                                 >
@@ -268,8 +268,8 @@ export default function Home() {
                                 <button
                                     className={`${isButtonHateDisabled
                                         ? 'cursor-not-allowed bg-white font-bold text-neutral-700'
-                                        : 'hover:text-white hover:bg-[#002859]'
-                                        }  px-2 sm:py-3 py-2 rounded-lg`}
+                                        : 'hover:text-white hover:bg-[#8B2E4F]'
+                                        }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonHateClick}
                                     disabled={isButtonHateDisabled}
                                 >
@@ -278,12 +278,12 @@ export default function Home() {
                             </li>
                         </ul>
                     </div>}
-                <div className="lg:ml-auto mt-4 lg:mt-0 flex flex-wrap items-center text-[8px] lg:text-xs mb-2">
+                <div className="xl:ml-auto mt-4 xl:mt-0 flex flex-wrap items-center text-[8px] lg:text-xs mb-2">
                     <div className="mr-4">
                         <div className="pt-1 sm:pt-2 relative mb-2">
-                            <input className="border h-9 sm:h-10 border-[#5CFFFF] border-opacity-50 bg-[#5CFFFF] placeholder-[#5CFFFF] bg-opacity-20 text-neutral-400 px-4 rounded-md focus:outline-none w-[280px] sm:w-[550px] md:w-[400px] lg:w-[220px] xl:w-[300px] 2xl:w-[500px] text-xs xl:text-sm " name="search" placeholder="Buscar juego" />
-                            <button type="submit" className="absolute right-0 top-0 mt-3.5 sm:mt-5 mr-4">
-                                <svg className="h-4 :w-4 fill-[#5CFFFF] hover:fill-opacity-50" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" viewBox="0 0 56.966 56.966">
+                            <input className="border h-9 sm:h-10 border-[#A61145] border-opacity-50 border-2 bg-neutral-900 placeholder-neutral-400 bg-opacity-5 text-neutral-400 px-4 rounded-md focus:outline-none w-[280px] sm:w-[550px] md:w-[400px] lg:w-[600px] xl:w-[265px] 2xl:w-[500px] text-xs xl:text-sm " name="search" placeholder="Buscar juego" />
+                            <button type="submit" className="flex items-center justify-center h-9 sm:h-10 w-10 bg-[#A61145] hover:bg-[#D92B68] hover:bg-opacity-30 bg-opacity-20 cursor-pointer absolute right-0 top-0 mt-1 sm:mt-2 rounded-r-md">
+                                <svg className="h-4 w-4 fill-[#A61145]" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" viewBox="0 0 56.966 56.966">
                                     <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
                                 </svg>
                             </button>
@@ -292,7 +292,7 @@ export default function Home() {
                     {/* <span className="text-neutral-400 mr-4">Número de juegos: {gamesToShow.length}</span> */}
                     <div className="mb-5 flex flex-col">
                         <span className="text-neutral-400 mb-0.5 text-xs xl:text-sm ml-1 mt-1 md:mt-0">Género</span>
-                        <select className="text-neutral-400 bg-neutral-900 px-2 py-1 border border-neutral-500 rounded-md h-9 sm:h-10 w-[280px] sm:w-[275px] md:w-[260px] lg:w-[125px] xl:w-[200px] text-xs xl:text-sm">
+                        <select className="text-neutral-400 bg-neutral-900 px-2 py-1 border border-neutral-500 rounded-md h-9 sm:h-10 w-[280px] sm:w-[275px] md:w-[260px] xl:w-[150px] text-xs xl:text-sm">
                             <option value="" defaultValue>Todos</option>
                             {genres.map((genre) => (
                                 <option key={genre} value={genre}>{genre}</option>

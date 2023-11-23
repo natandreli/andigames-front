@@ -53,9 +53,10 @@ export default function Navbar({ actualPage = '' }) {
                                         {navigation.map((item) => (
                                             <a
                                                 key={item.name}
-                                                className={classNames(
-                                                    actualPage === item.actualPage ? "text-neutral-600 cursor-not-allowed" : "text-white hover:text-[#5CFFFF] cursor-pointer"
-                                                )}
+                                                className={
+                                                    `${actualPage === item.actualPage ? "text-white cursor-not-allowed border-[#5CFFFF]" : "text-white hover:text-[#5CFFFF] cursor-pointer border-transparent hover:border-[#5CFFFF]"}
+                                                    border-b-2`
+                                                }
                                                 onClick={() => router.push(item.nextPage)}
                                             >
                                                 {item.name}
