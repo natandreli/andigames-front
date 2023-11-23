@@ -17,10 +17,12 @@ export async function getUser(nickname) {
 export async function getUserDetails(nickname) {
     try {
         const res = await fetch(`${BASE_URL}/users/${nickname}/details`);
+        console.log(res);
         if (!res.ok) {
             throw new Error('Error en el servicio getUserDetails');
         }
         const data = await res.json();
+        console.log(data);
         return data;
     } catch (error) {
         console.error('Error en el servicio getUserDetails:', error);
@@ -31,10 +33,12 @@ export async function getUserDetails(nickname) {
 export async function getUserFollowersAndFollowing(nickname) {
     try {
         const res = await fetch(`${BASE_URL}/users/${nickname}/followers&Following`);
+        console.log(res);
         if (!res.ok) {
             throw new Error('Error en el servicio getUserDetails');
         }
         const data = await res.json();
+        console.log(data);
         return data;
     } catch (error) {
         console.error('Error en el servicio getUserDetails:', error);
