@@ -101,7 +101,6 @@ export default function Home() {
     return regexCorreoElectronico.test(email);
   }
 
-
   return (
     <div>
       <Particle />

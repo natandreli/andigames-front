@@ -2,7 +2,6 @@ const BASE_URL = "https://andigames-2c0b1de6c888.herokuapp.com";
 
 export async function handleLogin(credentials) {
     try {
-        console.log(credentials)
         const res = await fetch(`${BASE_URL}/token`, {
             method: "POST",
             headers: {
@@ -22,7 +21,6 @@ export async function handleLogin(credentials) {
         document.cookie = `accessToken=${accessToken}; path=/; max-age=7200; secure; samesite=strict`;
         document.cookie = `accessUsername=${accessUsername}; path=/; max-age=7200; secure; samesite=strict`;
 
-        console.log(document.cookie)
         return res.status;
     } catch (error) {
         console.error("Error en el servicio de inicio de sesión:", error);
