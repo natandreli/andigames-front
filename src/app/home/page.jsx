@@ -8,7 +8,8 @@ import Awards from '@/components/Awards';
 import Game from '@/components/Game';
 import Loading from '@/components/Loading';
 import Particle from '@/components/Particle';
-import { getUserDetails, getUserFollowersAndFollowing } from '@/services/UserService'
+import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -23,8 +24,9 @@ export default function Home() {
     useEffect(() => {
         async function fetchUser() {
             setIsLoading(true);
-            const data = await getUserDetails('andiJack');
-            const dataFollowersFollowing = await getUserFollowersAndFollowing('andiJack');
+            const username = getCookieValue('accessUsername');
+            const data = await getUserDetails(username);
+            const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
             if (data && dataFollowersFollowing) {
                 setUser(data);
                 setFollowersFollowing(dataFollowersFollowing);

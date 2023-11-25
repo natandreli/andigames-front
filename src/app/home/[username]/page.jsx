@@ -9,7 +9,7 @@ import Game from '@/components/Game';
 import Loading from '@/components/Loading';
 import { useParams } from 'next/navigation';
 import Particle from '@/components/Particle';
-import { getUserDetails, getUserFollowersAndFollowing } from '@/services/UserService'
+import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
