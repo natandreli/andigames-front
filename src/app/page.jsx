@@ -135,7 +135,13 @@ export default function Home() {
             </button>
             <button
               className="bg-white hover:bg-[#A61145] text-neutral-700 hover:text-white py-2 px-4 rounded-full"
-              onClick={() => setOpenModalSingup(true)}
+              onClick={() => {
+                if (!getCookieValue('accessToken') || getCookieValue('accessToken').trim() === '') {
+                  setOpenModalSignup(true)
+                } else {
+                  router.push('/home')
+                }
+              }}
             >
               Regístrate
             </button>
