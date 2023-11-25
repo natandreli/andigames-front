@@ -18,8 +18,8 @@ export async function getUserDetails(nickname) {
     try {
         const res = await fetch(`${BASE_URL}/users/${nickname}/details`);
         console.log(res);
-        if (!res.ok) {
-            throw new Error('Error en el servicio getUserDetails');
+        if (!res === 200) {
+            return null;
         }
         const data = await res.json();
         console.log(data);

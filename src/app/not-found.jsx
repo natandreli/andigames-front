@@ -19,7 +19,10 @@ export default function NotFound() {
                             <button
                                 onClick={() => router.push('/')}
                             >
-                                ANDIGAMES
+                                <img src='/AndiGamesLogo-white-big-letters.png'
+                                    alt='AndiGames Logo'
+                                    className={`mt-1 w-[120px] sm:w-[160px] md:w-[200px] min-w-[50px] h-auto`}>
+                                </img>
                             </button>
                         </span>
                     </div>
@@ -39,6 +42,5 @@ export default function NotFound() {
                 </div>
             </div>
         </div>
-
     );
 };
