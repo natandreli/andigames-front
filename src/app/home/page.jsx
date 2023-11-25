@@ -10,10 +10,13 @@ import Loading from '@/components/Loading';
 import Particle from '@/components/Particle';
 import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
 import { getCookieValue } from '@/utils/getCookieValue';
+import { useRouter } from 'next/navigation';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
+
+    const router = useRouter();
 
     const [user, setUser] = useState(null);
     const [followersFollowing, setFollowersFollowing] = useState(null);
@@ -22,21 +25,25 @@ export default function Home() {
     const [showWishList, setShowWishList] = useState(false);
 
     useEffect(() => {
-        async function fetchUser() {
-            setIsLoading(true);
-            const username = getCookieValue('accessUsername');
-            const data = await getUserDetails(username);
-            const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
-            if (data && dataFollowersFollowing) {
-                setUser(data);
-                setFollowersFollowing(dataFollowersFollowing);
-                setGamesToShow(data.reviews);
-                setIsLoading(false);
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            async function fetchUser() {
+                setIsLoading(true);
+                const accessUsername = getCookieValue('accessUsername');
+                const data = await getUserDetails(accessUsername);
+                const dataFollowersFollowing = await getUserFollowersAndFollowing(accessUsername);
+                if (data && dataFollowersFollowing) {
+                    setUser(data);
+                    setFollowersFollowing(dataFollowersFollowing);
+                    setGamesToShow(data.reviews);
+                    setIsLoading(false);
+                }
             }
+            fetchUser();
         }
-
-        fetchUser();
-    }, []);
+    }, []);    
 
     const genres = [
         "Acción",

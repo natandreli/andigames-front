@@ -6,6 +6,7 @@ import Particle from '@/components/Particle';
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { handleLogin } from '@/services/authServices/login';
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -30,6 +31,7 @@ export default function Home() {
   });
 
   async function handleSubmitLogin(e) {
+    console.log(document.cookie)
     e.preventDefault();
     credentials.username = username;
     credentials.password = password;
@@ -78,7 +80,13 @@ export default function Home() {
           <div className={`text-[10px] sm:text-sm ml-auto min-[380px]:text-xs`}>
             <button
               className="text-white hover:text-[#FF5B94] py-2 px-4 rounded-full mr-2"
-              onClick={() => setOpenModalLogin(true)}
+              onClick={() => {
+                if (!getCookieValue('accessToken') || getCookieValue('accessToken').trim() === '') {
+                  setOpenModalLogin(true)
+                } else {
+                  router.push('/home')
+                }
+              }}
             >
               Inicia sesión
             </button>

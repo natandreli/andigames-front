@@ -19,8 +19,8 @@ export async function handleLogin(credentials) {
         const accessToken = data.access_token;
         const accessUsername = data.nickname;
 
-        document.cookie = `accessToken=${accessToken}; path=/; max-age=31536000; secure; samesite=strict`;
-        document.cookie = `accessUsername=${accessUsername}; path=/; max-age=31536000; secure; samesite=strict`;
+        document.cookie = `accessToken=${accessToken}; path=/; max-age=7200; secure; samesite=strict`;
+        document.cookie = `accessUsername=${accessUsername}; path=/; max-age=7200; secure; samesite=strict`;
 
         console.log(document.cookie)
         return res.status;
