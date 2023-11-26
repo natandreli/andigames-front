@@ -5,7 +5,16 @@ export async function searchGame(game_id) {
     try {
         const res = await fetch(`${BASE_URL}/${game_id}`);
         const data = await res.json();
-        console.log(data);
+        return data;
+    } catch (error) {
+        return null;
+    }
+}
+
+export async function searchGames(title) {
+    try {
+        const res = await fetch(`${BASE_URL}/games/search/${title}`);
+        const data = await res.json();
         return data;
     } catch (error) {
         return null;

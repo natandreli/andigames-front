@@ -25,9 +25,6 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
             router.push('/');
         } else {
             const accessUsername = getCookieValue('accessUsername');
-            console.log(accessUsername);
-            console.log(username)
-            console.log(accessToken)
             const res = await follow(username, accessUsername, accessToken);
             if (res) {
                 setIsFollowing(true);
@@ -52,8 +49,6 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
             router.push('/');
         } else {
             const accessUsername = getCookieValue('accessUsername');
-            console.log(accessUsername);
-            console.log(newFollowers)
             if (newFollowers.some((user) => user.nickname === accessUsername)) {
                 setIsFollowing(true);
             }

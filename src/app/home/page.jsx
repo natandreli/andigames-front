@@ -9,6 +9,7 @@ import Game from '@/components/Game';
 import Loading from '@/components/Loading';
 import Particle from '@/components/Particle';
 import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
+import { searchGame } from '@/services/gamesServices/gamesServices';
 import { getCookieValue } from '@/utils/getCookieValue';
 import { useRouter } from 'next/navigation';
 
@@ -20,8 +21,13 @@ export default function Home() {
 
     const [user, setUser] = useState(null);
     const [followersFollowing, setFollowersFollowing] = useState(null);
+
     const [isLoading, setIsLoading] = useState(true);
-    const [gamesToShow, setGamesToShow] = useState(null);
+    const [userDontExist, setUserDontExist] = useState(false);
+
+    const [isLoadingGames, setIsLoadingGames] = useState(true);
+    const [gamesToShow, setGamesToShow] = useState([]);
+
     const [showWishList, setShowWishList] = useState(false);
 
     useEffect(() => {
@@ -30,20 +36,41 @@ export default function Home() {
             router.push('/');
         } else {
             async function fetchUser() {
-                setIsLoading(true);
-                const accessUsername = getCookieValue('accessUsername');
-                const data = await getUserDetails(accessUsername);
-                const dataFollowersFollowing = await getUserFollowersAndFollowing(accessUsername);
-                if (data && dataFollowersFollowing) {
+                const username = getCookieValue('accessUsername');
+                const data = await getUserDetails(username);
+                if (data) {
                     setUser(data);
-                    setFollowersFollowing(dataFollowersFollowing);
-                    setGamesToShow(data.reviews);
-                    setIsLoading(false);
+                    const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
+                    if (data && dataFollowersFollowing) {
+                        setFollowersFollowing(dataFollowersFollowing);
+                        await loadGames(data.reviews);
+                    }
+                } else {
+                    setUserDontExist(true);
                 }
             }
             fetchUser();
         }
-    }, []);    
+    }, []);
+
+    useEffect(() => {
+        if (user && followersFollowing) {
+            setIsLoading(false);
+        }
+    }, [user, followersFollowing]);
+
+    const loadGames = async (reviews) => {
+        setIsLoadingGames(true);
+        const games = [];
+        for (const review of reviews) {
+            const game = await searchGame(review);
+            if (game) {
+                games.push(game);
+            }
+        }
+        setGamesToShow(games);
+        setIsLoadingGames(false);
+    };
 
     const genres = [
         "Acción",
@@ -81,20 +108,22 @@ export default function Home() {
     const [isButtonDislikeDisabled, setButtonDislikeDisabled] = useState(false);
     const [isButtonHateDisabled, setButtonHateDisabled] = useState(false);
 
-    const handleButtonGamesClick = () => {
+    async function handleButtonGamesClick() {
         setButtonGamesDisabled(true);
         setButtonWishListDisabled(false);
 
         setShowWishList(false);
-        setGamesToShow(user.reviews);
+
+        await loadGames(user.reviews);
     };
 
-    const handleButtonWishListClick = () => {
+    async function handleButtonWishListClick() {
         setButtonGamesDisabled(false);
         setButtonWishListDisabled(true);
 
         setShowWishList(true);
-        setGamesToShow(user.wishlist);
+
+        await loadGames(user.wishlist);
     };
 
     const handleButtonAllClick = () => {
@@ -311,30 +340,51 @@ export default function Home() {
                 </div>
             </div>
             <div className='px-10 py-3 mb-6'>
-                {gamesToShow.length != 0 ? (
+                {isLoadingGames ? (
                     <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                        {user.reviews.map((game) => (
-                            <Game
-                                key={game.id}
-                                title={game.title}
-                                cover={game.cover}
-                                genre={game.genre}
-                                realease_date={game.realease_date}
-                                publisher={game.publisher}
-                                developer={game.developer}
-                                steam_rating={game.steam_rating}
-                                platform_rating={game.platform_rating}
-                                url={game.url}
-                                me_review={game.me_review ? game.me_review : null}
-                                friend_review={game.friend_review ? game.friend_review : null}
-                            />
+                        <span className='text-neutral-400 text-center w-full'>Cargando juegos...</span>
+                    </div>
+                ) : (gamesToShow.length != 0
+                    ? (<div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
+                        {gamesToShow.map((game) => (
+                            <div key={game.id}>
+                                <div style={{ display: 'inline-block', textAlign: 'left' }}>
+                                    <Game
+                                        key={game.id}
+                                        title={game.title}
+                                        cover={game.cover}
+                                        genre={game.genres}
+                                        realease_date={game.release_date}
+                                        publisher={game.publisher}
+                                        developer={game.developer}
+                                        steam_rating={game.steam_rating}
+                                        platform_rating={game.platform_rating}
+                                        url={game.url}
+                                        me_review={game.me_review ? game.me_review : null}
+                                        friend_review={game.friend_review ? game.friend_review : null}
+                                    />
+                                </div>
+                                <span
+                                    style={{
+                                        display: 'block',
+                                        marginTop: '10px',
+                                        textAlign: 'center',
+                                        maxWidth: '120px',
+                                        margin: '0 auto',
+                                    }}
+                                    className={`text-xs sm:text-sm text-white leading-tight font-light ${lexend.className}`}
+                                >
+                                    {game.title}
+                                </span>
+                            </div>
                         )
                         )}
                     </div>
-                ) : (
-                    <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                        <span className='text-neutral-400 text-center w-full'>No hay juegos para mostrar</span>
-                    </div>
+                    ) : (
+                        <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
+                            <span className='text-neutral-400 text-center w-full'>No hay juegos para mostrar</span>
+                        </div>
+                    )
                 )}
             </div>
         </div>

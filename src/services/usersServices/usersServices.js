@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.andigames.online";
-// const BASE_URL = "http://127.0.0.1:8000";
+//const BASE_URL = "http://127.0.0.1:8000";
 
 export async function getUser(nickname) {
     try {
@@ -23,7 +23,6 @@ export async function getUserDetails(nickname) {
         }
 
         const data = await res.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error('Error en el servicio getUserDetails:', error);
@@ -51,7 +50,7 @@ export async function follow(nickname, follower, token) {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
+                'accept': 'application/json',
             },
             body: new URLSearchParams({ 
                 nickname: nickname,

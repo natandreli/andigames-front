@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import SampleGames from '@/components/SampleGames';
 import Particle from '@/components/Particle';
-import { searchGames } from '@/services/gamesServices/searchGames';
+import { searchGames } from '@/services/gamesServices/gamesServices';
 import Game from '@/components/Game';
 import Image from 'next/image';
 import { getCookieValue } from '@/utils/getCookieValue';

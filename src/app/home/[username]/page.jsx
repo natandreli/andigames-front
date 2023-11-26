@@ -10,7 +10,7 @@ import Loading from '@/components/Loading';
 import { useParams, useRouter } from 'next/navigation';
 import Particle from '@/components/Particle';
 import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
-import { searchGame } from '@/services/gamesServices/searchGame';
+import { searchGame } from '@/services/gamesServices/gamesServices';
 import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
@@ -37,52 +37,46 @@ export default function Home() {
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');
         } else {
-            async function fetchUser() {
-                const data = await getUserDetails(username);
-                if (data) {
-                    const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
-                    if (data && dataFollowersFollowing) {
+            const accessUsername = getCookieValue('accessUsername');
+            if (accessUsername === username) {
+                router.push('/home');
+            } else {
+                async function fetchUser() {
+                    const data = await getUserDetails(username);
+                    if (data) {
                         setUser(data);
-                        setFollowersFollowing(dataFollowersFollowing);
-
-                        // const games = [];
-
-                        // data.reviews.forEach(async (review) => {
-                        //     games.push(await searchGame(review));
-                        // });
-                        // console.log(games);
-                        // setGamesToShow(games);
-                        // setIsLoading(false);
+                        const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
+                        if (data && dataFollowersFollowing) {
+                            setFollowersFollowing(dataFollowersFollowing);
+                            await loadGames(data.reviews);
+                        }
+                    } else {
+                        setUserDontExist(true);
                     }
-                } else {
-                    setUserDontExist(true);
-                    setIsLoading(false);
                 }
+                fetchUser();
             }
-            fetchUser();
         }
     }, [username]);
 
     useEffect(() => {
-        if (user) {
-            console.log(user)
-            const games = [];
-
-            user.reviews.forEach(async (review) => {
-                games.push(await searchGame(review));
-            });
-
-            setGamesToShow(games);
+        if (user && followersFollowing) {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [user, followersFollowing]);
 
-    useEffect(() => {
-        if (gamesToShow.length != 0) {
-            console.log(gamesToShow)
-            setIsLoadingGames(false);
+    const loadGames = async (reviews) => {
+        setIsLoadingGames(true);
+        const games = [];
+        for (const review of reviews) {
+            const game = await searchGame(review);
+            if (game) {
+                games.push(game);
+            }
         }
-    }, [gamesToShow]);
+        setGamesToShow(games);
+        setIsLoadingGames(false);
+    };
 
     const genres = [
         "Acción",
@@ -120,20 +114,22 @@ export default function Home() {
     const [isButtonDislikeDisabled, setButtonDislikeDisabled] = useState(false);
     const [isButtonHateDisabled, setButtonHateDisabled] = useState(false);
 
-    const handleButtonGamesClick = () => {
+    async function handleButtonGamesClick() {
         setButtonGamesDisabled(true);
         setButtonWishListDisabled(false);
 
         setShowWishList(false);
-        setGamesToShow(user.reviews);
+
+        await loadGames(user.reviews);
     };
 
-    const handleButtonWishListClick = () => {
+    async function handleButtonWishListClick() {
         setButtonGamesDisabled(false);
         setButtonWishListDisabled(true);
 
         setShowWishList(true);
-        setGamesToShow(user.wishlist);
+
+        await loadGames(user.wishlist);
     };
 
     const handleButtonAllClick = () => {
@@ -377,25 +373,41 @@ export default function Home() {
             <div className='px-10 py-3 mb-6'>
                 {isLoadingGames ? (
                     <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                        <Loading />
+                        <span className='text-neutral-400 text-center w-full'>Cargando juegos...</span>
                     </div>
                 ) : (gamesToShow.length != 0
                     ? (<div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
                         {gamesToShow.map((game) => (
-                            <Game
-                                key={game.id}
-                                title={game.title}
-                                cover={game.cover}
-                                genre={game.genres}
-                                realease_date={game.release_date}
-                                publisher={game.publisher}
-                                developer={game.developer}
-                                steam_rating={game.steam_rating}
-                                platform_rating={game.platform_rating}
-                                url={game.url}
-                                me_review={game.me_review ? game.me_review : null}
-                                friend_review={game.friend_review ? game.friend_review : null}
-                            />
+                            <div key={game.id}>
+                                <div style={{ display: 'inline-block', textAlign: 'left' }}>
+                                    <Game
+                                        key={game.id}
+                                        title={game.title}
+                                        cover={game.cover}
+                                        genre={game.genres}
+                                        realease_date={game.release_date}
+                                        publisher={game.publisher}
+                                        developer={game.developer}
+                                        steam_rating={game.steam_rating}
+                                        platform_rating={game.platform_rating}
+                                        url={game.url}
+                                        me_review={game.me_review ? game.me_review : null}
+                                        friend_review={game.friend_review ? game.friend_review : null}
+                                    />
+                                </div>
+                                <span
+                                    style={{
+                                        display: 'block',
+                                        marginTop: '10px',
+                                        textAlign: 'center',
+                                        maxWidth: '120px',
+                                        margin: '0 auto',
+                                    }}
+                                    className={`text-xs sm:text-sm text-white leading-tight font-light ${lexend.className}`}
+                                >
+                                    {game.title}
+                                </span>
+                            </div>
                         )
                         )}
                     </div>
