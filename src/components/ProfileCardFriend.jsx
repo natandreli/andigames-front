@@ -1,13 +1,23 @@
 import { Lexend } from 'next/font/google';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Counter from '@/components/Counter';
+import { follow, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices';
+import { getCookieValue } from '@/utils/getCookieValue';
+import { useEffect } from 'react';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function ProfileCard({ photo, reviews, following, followers, nickname, username, description }) {
-    const router = useRouter();
 
+    // useEffect(() => {
+    //     const token = getCookieValue('accessToken');
+    //     const username = getCookieValue('accessUsername');
+    //     const res = getUserFollowersAndFollowing(username);
+    //     if (res) {
+    //         res.following
+    //     }
+    // });
+    
     return (
         <div className="flex flex-col sm:flex-row items-center h-full w-full">
             <div className="mb-4 lg:mr-6 items-center flex justify-center" style={{ minWidth: '150px', minHeight: '150px' }}>
@@ -24,7 +34,7 @@ export default function ProfileCard({ photo, reviews, following, followers, nick
                 <Counter
                     reviews={reviews}
                     following={following}
-                    followers={followers} 
+                    followers={followers}
                 />
                 <span className={`font-bold text-white text-lg lg:text-3xl ${lexend.className}`}>
                     {nickname}

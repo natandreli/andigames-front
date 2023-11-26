@@ -1,6 +1,6 @@
 import { login } from "./login";
 
-const BASE_URL = "https://andigames-2c0b1de6c888.herokuapp.com";
+const BASE_URL = "https://api.andigames.online";
 
 export async function handleSignup(singupValues) {
     try {
