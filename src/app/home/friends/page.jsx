@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ActivityCard from '@/components/ActivityCard';
 import Particle from '@/components/Particle';
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 

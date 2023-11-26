@@ -10,6 +10,7 @@ import Loading from '@/components/Loading';
 import { useParams } from 'next/navigation';
 import Particle from '@/components/Particle';
 import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -27,20 +28,25 @@ export default function Home() {
     const [showWishList, setShowWishList] = useState(false);
 
     useEffect(() => {
-        async function fetchUser() {
-            setIsLoading(true);
-            const data = await getUserDetails(username);
-            if (data) {
-                const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
-                if (data && dataFollowersFollowing) {
-                    setUser(data);
-                    setFollowersFollowing(dataFollowersFollowing);
-                    setGamesToShow(data.reviews);
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            async function fetchUser() {
+                setIsLoading(true);
+                const data = await getUserDetails(username);
+                if (data) {
+                    const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
+                    if (data && dataFollowersFollowing) {
+                        setUser(data);
+                        setFollowersFollowing(dataFollowersFollowing);
+                        setGamesToShow(data.reviews);
+                        setIsLoading(false);
+                    }
+                } else {
+                    setUserDontExist(true);
                     setIsLoading(false);
                 }
-            } else {
-                setUserDontExist(true);
-                setIsLoading(false);
             }
         }
 

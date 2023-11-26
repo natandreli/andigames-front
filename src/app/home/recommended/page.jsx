@@ -8,6 +8,7 @@ import Particle from '@/components/Particle';
 import { searchGames } from '@/services/gamesServices/searchGames';
 import Game from '@/components/Game';
 import Image from 'next/image';
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -307,21 +308,25 @@ export default function Home() {
             setBadSearch(true);
         } else {
             setBadSearch(false);
-            console.log('Buscando juegos...');
             setIsSearching(true);
             const data = await searchGames(gameTitle);
             if (data) {
-                console.log('Juegos encontrados: ', data);
                 setFoundGames(data);
                 setIsSearching(false);
                 setAlreadySearch(true);
             } else {
-                console.log('No se encontraron juegos');
                 setFoundGames([]);
                 setAlreadySearch(true);
             }
         }
     };
+
+    useEffect(() => {
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } 
+    }, []);   
 
     return (
         <div className=''>
@@ -410,7 +415,7 @@ export default function Home() {
                             : (
                                 <div className='mt-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
                                     {foundGames.map((game) => (
-                                        <div>
+                                        <div key={game.id}>
                                             <div style={{ display: 'inline-block', textAlign: 'left' }}>
                                                 <Game
                                                     key={game.id}

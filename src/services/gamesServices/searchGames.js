@@ -6,7 +6,6 @@ export async function searchGames(title) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio searchGames:', error);
         return null;
     }
 }
