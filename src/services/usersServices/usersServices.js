@@ -4,8 +4,9 @@ const BASE_URL = "https://api.andigames.online";
 export async function getUser(nickname) {
     try {
         const res = await fetch(`${BASE_URL}/users/${nickname}`);
+
         if (!res.ok) {
-            throw new Error('Error en el servicio getUser');
+            return null;
         }
         const data = await res.json();
         return data;

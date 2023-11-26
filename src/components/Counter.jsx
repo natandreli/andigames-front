@@ -83,7 +83,7 @@ export default function Counter({ followers, following, reviews }) {
                                             </div>
                                         ) : (
                                             <div className='py-10 items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                                                <span className='text-neutral-400 text-center w-full'>Aún no te sigue nadie</span>
+                                                <span className='text-neutral-400 text-center w-full'>Aún no hay seguidores</span>
                                             </div>
                                         )}
                                     </div>
@@ -139,7 +139,7 @@ export default function Counter({ followers, following, reviews }) {
                                             </div>
                                         ) : (
                                             <div className='py-10 items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                                                <span className='text-neutral-400 text-center w-full'>Aún no sigues a nadie</span>
+                                                <span className='text-neutral-400 text-center w-full'>Aún no hay seguidos</span>
                                             </div>
                                         )}
                                     </div>

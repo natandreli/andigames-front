@@ -6,6 +6,8 @@ import Particle from '@/components/Particle';
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { handleLogin } from '@/services/authServices/login';
+import { handleSignup } from '@/services/usersServices/register';
+import { getUser } from '@/services/usersServices/usersServices';
 import { getCookieValue } from '@/utils/getCookieValue';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,16 +19,19 @@ export default function Home() {
   const router = useRouter();
 
   const [openModalLogin, setOpenModalLogin] = useState(false)
-  const [openModalSingup, setOpenModalSingup] = useState(false)
+  const [openModalSignup, setOpenModalSignup] = useState(false)
+  const [openModalGoodSignup, setOpenModalGoodSignup] = useState(false)
 
   const [badLogin, setBadLogin] = useState(false)
   const [badSignup, setBadSignup] = useState(false)
+  const [badSignupMessage, setBadSignupMessage] = useState('Parece que algo salió mal. Intenta de nuevo, por favor.')
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
   const [responseStatus, setResponseStatus] = useState(0);
+  const [signupResponse, setSignupResponse] = useState(null);
 
   const [signupNickname, setSignupNickname] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
@@ -54,6 +59,14 @@ export default function Home() {
 
   async function handleSubmitSignup(e) {
     e.preventDefault();
+
+    const dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+    const today = new Date();
+    const differenceMs = today - signupBirthdate;
+    const differenceYears = differenceMs / (1000 * 60 * 60 * 24 * 365.25);
+
+    const usernameInUse = await getUser(signupUsername);
+
     signupValues.nickname = signupUsername;
     signupValues.email = signupEmail;
     signupValues.password = signupPassword;
@@ -62,6 +75,55 @@ export default function Home() {
     signupValues.username = signupNickname;
 
     console.log(signupValues);
+
+    if (!isValidEmail(signupEmail) || signupEmail == '') {
+      setBadSignupMessage('Por favor, ingresa un correo electrónico válido.');
+      setBadSignup(true);
+      return;
+    } else if (signupNickname.length < 3) {
+      setBadSignupMessage('El apodo debe tener al menos 3 caracteres. Intenta con otro, por favor.');
+      setBadSignup(true);
+      return;
+    } else if (signupUsername.length < 3 || /(_.*_)/.test(signupUsername)) {
+      setBadSignupMessage('El usuario debe ser alfanumérico y contener solo un guión bajo. Debe tener al menos 3 caracteres. Intenta con otro, por favor.');
+      setBadSignup(true);
+      return;
+    } else if (signupUsername.length >= 3 && usernameInUse) {
+      setBadSignupMessage('El usuario que ingresaste ya está registrado. Intenta con otro, por favor.');
+      setBadSignup(true);
+      return;
+    } else if (signupPassword.length < 8) {
+      console.log('badpassword')
+      setBadSignupMessage('La contraseña debe tener al menos 8 caracteres. Intenta con otra, por favor.');
+      setBadSignup(true);
+      return;
+    } else if (!dateFormat.test(formatDateToString(signupBirthdate))) {
+      setBadSignupMessage('La fecha de nacimiento es inválida.');
+      setBadSignup(true);
+      return;
+    } else if (differenceYears < 18) {
+      setBadSignupMessage('Debes ser mayor de edad para registrarte en ANDIGAMES.');
+      setBadSignup(true);
+      return;
+    } else {
+      const res = await handleSignup(signupValues)
+      console.log(res.status);
+      if (res.status !== 200) {
+        setSignupResponse(res);
+        setBadSignup(true);
+        return;
+      } else {
+        setOpenModalSignup(false)
+        setBadSignup(false)
+        setSignupNickname('')
+        setSignupEmail('')
+        setSignupPassword('')
+        setSignupGenre('F')
+        setSignupBirthdate(new Date())
+        setSignupUsername('')
+        setOpenModalGoodSignup(true);
+      }
+    }
   }
 
   const [credentials, setCredentials] = useState({
@@ -164,6 +226,7 @@ export default function Home() {
           onClose={() => {
             setOpenModalLogin(false)
             setPassword('')
+            setUsername('')
             setBadLogin(false)
             setShowPassword(false)
           }}>
@@ -195,6 +258,7 @@ export default function Home() {
                     onClick={() => {
                       setOpenModalLogin(false)
                       setPassword('')
+                      setUsername('')
                       setBadLogin(false)
                       setShowPassword(false)
                     }}
@@ -306,12 +370,12 @@ export default function Home() {
         </Dialog >
       </Transition.Root >
 
-      <Transition.Root show={openModalSingup} as={Fragment}>
+      <Transition.Root show={openModalSignup} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10"
           onClose={() => {
-            setOpenModalSingup(false)
+            setOpenModalSignup(false)
             setBadSignup(false)
             setSignupNickname('')
             setSignupEmail('')
@@ -348,7 +412,7 @@ export default function Home() {
                   <button
                     className="absolute top-4 right-4"
                     onClick={() => {
-                      setOpenModalSingup(false)
+                      setOpenModalSignup(false)
                       setBadSignup(false)
                       setSignupNickname('')
                       setSignupEmail('')
@@ -426,7 +490,7 @@ export default function Home() {
                           </label>
                           <div className="relative">
                             <input
-                              name='singupPassword'
+                              name='signupPassword'
                               className={`appearance-none border border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${badSignup ? 'border-red-500' : ''}`}
                               maxLength={64}
                               type={showPassword ? 'text' : 'password'}
@@ -453,17 +517,21 @@ export default function Home() {
                             </button>
                           </div>
                         </div>
-                        <div className="flex flex-col md:flex-row md:space-x-4">
-                          <div className="mb-4 sm:mb-0 w-full md:w-1/2">
+                        <div className="flex flex-col md:flex-row md:space-x-4 mb-4">
+                          <div className="mb-4 xl:mb-0 w-full md:w-1/2">
                             <label className="block text-neutral-400 text-sm font-bold mb-2">
                               Fecha de nacimiento <span className="text-red-500">*</span>
                             </label>
                             <DatePicker
                               selected={signupBirthdate}
                               onChange={(date) => setSignupBirthdate(date)}
+                              peekNextMonth
+                              showMonthDropdown
+                              showYearDropdown
+                              dropdownMode="select"
                               wrapperClassName="w-full"
                               dateFormat="yyyy/MM/dd"
-                              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className={`appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${badSignup ? 'border-red-500' : ''}`}
                             />
                           </div>
                           <div className="w-full md:w-1/2">
@@ -486,6 +554,15 @@ export default function Home() {
                             </div>
                           </div>
                         </div>
+                        {badSignup &&
+                          <div className="">
+                            <label className="block text-neutral-400 text-sm">
+                              <span className="text-red-500">
+                                {badSignupMessage}
+                              </span>
+                            </label>
+                          </div>
+                        }
                         <div className="mb-4 mt-9">
                           <button
                             className="w-full bg-[#6500E1] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
@@ -504,6 +581,61 @@ export default function Home() {
                         >
                           ¿Ya eres parte de ANDIGAMES? Inicia sesión
                         </button>
+                      </div>
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
+      <Transition.Root show={openModalGoodSignup} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setOpenModalGoodSignup}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-neutral-900 bg-opacity-70 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="pt-4 pb-8 sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:mt-8 w-xl sm:w-full sm:max-w-[725px]">
+                  <button className="absolute top-4 right-4" onClick={setOpenModalGoodSignup}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
+                      <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                    </svg>
+                  </button>
+                  <div className="bg-neutral-800 px-4 pt-6 sm:p-6">
+                    <div className="flex items-center justify-center text-center style={{ minWidth: '150px', minHeight: '200px' }">
+                      <div className="mt-5 sm:ml-4 sm:mt-0 mb-5 sm:mb-0">
+                        <Dialog.Title as="h1" className={`text-center mb-4 text-xl sm:text-2xl font-bold leading-6 text-white ${lexend.className}`}>
+                          ¡Bienvenido a ANDIGAMES!
+                        </Dialog.Title>
+                        <div className="text-neutral-400 text-sm sm:text-base">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="inline-block w-[100px] h-[100px] fill-amber-500">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-4.464a.75.75 0 10-1.061-1.061 3.5 3.5 0 01-4.95 0 .75.75 0 00-1.06 1.06 5 5 0 007.07 0zM9 8.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S7.448 7 8 7s1 .672 1 1.5zm3 1.5c.552 0 1-.672 1-1.5S12.552 7 12 7s-1 .672-1 1.5.448 1.5 1 1.5z" clipRule="evenodd" />
+                          </svg>
+                          <p className="mt-4">
+                            <span className={`font-semibold text-base sm:text-xl ${lexend.className}`}>Inicia sesión para comenzar.</span>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
