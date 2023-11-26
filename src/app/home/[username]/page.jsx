@@ -7,14 +7,17 @@ import ProfileCardFriend from '@/components/ProfileCardFriend';
 import Awards from '@/components/Awards';
 import Game from '@/components/Game';
 import Loading from '@/components/Loading';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Particle from '@/components/Particle';
 import { getUserDetails, getUserFollowersAndFollowing } from '@/services/usersServices/usersServices'
+import { searchGame } from '@/services/gamesServices/searchGame';
 import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
+
+    const router = useRouter();
 
     const { username } = useParams();
 
@@ -24,7 +27,9 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [userDontExist, setUserDontExist] = useState(false);
 
-    const [gamesToShow, setGamesToShow] = useState(null);
+    const [isLoadingGames, setIsLoadingGames] = useState(true);
+    const [gamesToShow, setGamesToShow] = useState([]);
+
     const [showWishList, setShowWishList] = useState(false);
 
     useEffect(() => {
@@ -33,15 +38,21 @@ export default function Home() {
             router.push('/');
         } else {
             async function fetchUser() {
-                setIsLoading(true);
                 const data = await getUserDetails(username);
                 if (data) {
                     const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
                     if (data && dataFollowersFollowing) {
                         setUser(data);
                         setFollowersFollowing(dataFollowersFollowing);
-                        setGamesToShow(data.reviews);
-                        setIsLoading(false);
+
+                        // const games = [];
+
+                        // data.reviews.forEach(async (review) => {
+                        //     games.push(await searchGame(review));
+                        // });
+                        // console.log(games);
+                        // setGamesToShow(games);
+                        // setIsLoading(false);
                     }
                 } else {
                     setUserDontExist(true);
@@ -51,6 +62,27 @@ export default function Home() {
             fetchUser();
         }
     }, [username]);
+
+    useEffect(() => {
+        if (user) {
+            console.log(user)
+            const games = [];
+
+            user.reviews.forEach(async (review) => {
+                games.push(await searchGame(review));
+            });
+
+            setGamesToShow(games);
+            setIsLoading(false);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (gamesToShow.length != 0) {
+            console.log(gamesToShow)
+            setIsLoadingGames(false);
+        }
+    }, [gamesToShow]);
 
     const genres = [
         "Acción",
@@ -343,15 +375,19 @@ export default function Home() {
                 </div>
             </div>
             <div className='px-10 py-3 mb-6'>
-                {gamesToShow.length != 0 ? (
+                {isLoadingGames ? (
                     <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                        {user.reviews.map((game) => (
+                        <Loading />
+                    </div>
+                ) : (gamesToShow.length != 0
+                    ? (<div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
+                        {gamesToShow.map((game) => (
                             <Game
                                 key={game.id}
                                 title={game.title}
                                 cover={game.cover}
-                                genre={game.genre}
-                                realease_date={game.realease_date}
+                                genre={game.genres}
+                                realease_date={game.release_date}
                                 publisher={game.publisher}
                                 developer={game.developer}
                                 steam_rating={game.steam_rating}
@@ -363,10 +399,11 @@ export default function Home() {
                         )
                         )}
                     </div>
-                ) : (
-                    <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
-                        <span className='text-neutral-400 text-center w-full'>No hay juegos para mostrar</span>
-                    </div>
+                    ) : (
+                        <div className='items-center justify-center flex flex-wrap gap-6 lg:gap-8'>
+                            <span className='text-neutral-400 text-center w-full'>No hay juegos para mostrar</span>
+                        </div>
+                    )
                 )}
             </div>
         </div>
