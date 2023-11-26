@@ -48,9 +48,8 @@ export default function Home() {
                     setIsLoading(false);
                 }
             }
+            fetchUser();
         }
-
-        fetchUser();
     }, [username]);
 
     const genres = [
