@@ -576,7 +576,7 @@ export default function Home() {
                           className="w-full text-xs sm:text-sm hover:text-[#FF5B94] text-neutral-400 rounded"
                           onClick={() => {
                             setOpenModalLogin(true)
-                            setOpenModalSingup(false)
+                            setOpenModalSignup(false)
                           }}
                         >
                           ¿Ya eres parte de ANDIGAMES? Inicia sesión
