@@ -95,6 +95,8 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             if (!res) {
                 setBadDeleteReview(true);
             } else {
+                const updatedUserDetails = await getUserDetails(accessUsername);
+                setUser(updatedUserDetails);  // Actualiza el estado del usuario
                 setOpenModalDeleteReview(false);
                 setMyReview(null);
                 setReviewed(false);
@@ -294,7 +296,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                     {friendReview &&
                                         <Review {...friendReview} />
                                     }
-                                    {reviewed &&
+                                    {reviewed && myReview &&
                                         <Review {...myReview} />
                                     }
                                 </Dialog.Panel>
