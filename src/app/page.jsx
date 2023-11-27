@@ -42,8 +42,8 @@ export default function Home() {
 
   const formatDateToString = (date) => {
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Agrega un 0 al mes si es necesario
-    const day = date.getDate().toString().padStart(2, '0'); // Agrega un 0 al día si es necesario
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
 

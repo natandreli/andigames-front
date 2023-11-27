@@ -9,11 +9,14 @@ import { searchGames } from '@/services/gamesServices/gamesServices';
 import Game from '@/components/Game';
 import Image from 'next/image';
 import { getCookieValue } from '@/utils/getCookieValue';
+import { useRouter } from 'next/navigation';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
 
+    const router = useRouter();
+    
     const exampleGames = [
         {
             id: 1,
@@ -325,8 +328,8 @@ export default function Home() {
         const accessToken = getCookieValue('accessToken');
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');
-        } 
-    }, []);   
+        }
+    }, []);
 
     return (
         <div className=''>
@@ -421,7 +424,7 @@ export default function Home() {
                                                     key={game.id}
                                                     id={game.id}
                                                     title={game.title}
-                                                    cover={null}
+                                                    cover={game.cover}
                                                     genre={game.genres}
                                                     realease_date={game.release_date}
                                                     publisher={game.publisher}
