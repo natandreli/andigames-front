@@ -53,6 +53,7 @@ export default function Home() {
     const [badSearch, setBadSearch] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [shouldUpdatePredictions, setShouldUpdatePredictions] = useState(false);
+    const [isLoadigPredictions, setIsLoadingPredictions] = useState(false);
 
     const [samplesGames, setSamplesGames] = useState(null);
 
@@ -95,7 +96,7 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchPredictions() {
-            setIsLoading(true);
+            setIsLoadingPredictions(true);
             try {
                 const accessUsername = getCookieValue('accessUsername');
                 const data = await getGamesPredictions(accessUsername);
@@ -107,7 +108,7 @@ export default function Home() {
             } catch (error) {
                 return;
             }
-            setIsLoading(false);
+            setIsLoadingPredictions(false);
         }
 
         if (shouldUpdatePredictions) {
@@ -260,6 +261,7 @@ export default function Home() {
             }
             <div className='mt-6 mb-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
                 {showSamplesGames && (
+                    (!isLoadigPredictions) ? (
                     (samplesGames && samplesGames.length > 0) ? (
                         samplesGames.map((game) => (
                             <div key={game.id}>
@@ -297,6 +299,11 @@ export default function Home() {
                     ) : (
                         <div className="text-center text-neutral-400">
                             <p className="text-xl">Debes tener reseñas para hacer predicciones.</p>
+                        </div>
+                    ))
+                    : (
+                        <div className="text-center text-neutral-400">
+                            <p className="text-xl">Cargando...</p>
                         </div>
                     )
                 )}
