@@ -23,7 +23,7 @@ export default function Review({ game_id, user_nickname, rating, review_date, co
                 </p>
                 {commentary &&
                     <p className="mt-2">
-                        <span className='text-sm'>{commentary}</span>
+                        <span className='text-base'>{commentary}</span>
                     </p>
                 }
             </div>
