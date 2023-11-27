@@ -17,7 +17,7 @@ export async function getReview(nickname, game_id) {
 
 export async function addReview(game_id, user_nickname, review_date, rating, commentary, token) {
     try {
-        const res = await fetch(`${BASE_URL}/reviews/add/${nickname}`, {
+        const res = await fetch(`${BASE_URL}/reviews/add/${user_nickname}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -33,7 +33,7 @@ export async function addReview(game_id, user_nickname, review_date, rating, com
         });
 
         console.log(res);
-        
+
         if (!res.ok) {
             return null;
         }
