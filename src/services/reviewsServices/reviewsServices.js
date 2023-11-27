@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.andigames.online";
-//const BASE_URL = "http://127.0.0.1:8000";
+//const BASE_URL = "https://api.andigames.online";
+const BASE_URL = "http://127.0.0.1:8000";
 
 export async function getReview(nickname, game_id) {
     try {
@@ -17,7 +17,7 @@ export async function getReview(nickname, game_id) {
 
 export async function addReview(game_id, user_nickname, review_date, rating, commentary, token) {
     try {
-        const res = await fetch(`${BASE_URL}/reviews/add/${user_nickname}/`, {
+        const res = await fetch(`${BASE_URL}/reviews/add/${user_nickname}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
