@@ -52,6 +52,7 @@ export default function Home() {
     const [alreadySearch, setAlreadySearch] = useState(false);
     const [badSearch, setBadSearch] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [shouldUpdatePredictions, setShouldUpdatePredictions] = useState(false);
 
     const [samplesGames, setSamplesGames] = useState(null);
 
@@ -91,6 +92,27 @@ export default function Home() {
             getSamplesGames();
         }
     }, []);
+
+    useEffect(() => {
+        async function fetchPredictions() {
+          setIsLoading(true);
+          try {
+            const data = await getGamesPredictions(accessUsername);
+            if (data && data.length > 0) {
+              setSamplesGames(data);
+            } else {
+              setSamplesGames([]); // Si no hay datos, establecer un arreglo vacío
+            }
+          } catch (error) {
+            console.error("Error al obtener predicciones", error);
+          }
+          setIsLoading(false);
+        }
+      
+        if (shouldUpdatePredictions) {
+          fetchPredictions();
+        }
+      }, [accessUsername, shouldUpdatePredictions]); 
 
     useEffect(() => {
         if (samplesGames) {
@@ -136,6 +158,7 @@ export default function Home() {
                                     setFoundGames([]);
                                     setAlreadySearch(false);
                                     setBadSearch(false);
+                                    setShouldUpdatePredictions(true);
                                 } else {
                                     setGameTitle(value);
                                     setShowSamplesGames(false); // No mostrar predicciones mientras se busca
