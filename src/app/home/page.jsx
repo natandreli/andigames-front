@@ -38,7 +38,6 @@ export default function Home() {
             async function fetchUser() {
                 const username = getCookieValue('accessUsername');
                 const data = await getUserDetails(username);
-                console.log(data);
                 if (data) {
                     setUser(data);
                     const dataFollowersFollowing = await getUserFollowersAndFollowing(username);

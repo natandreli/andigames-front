@@ -97,14 +97,15 @@ export default function Home() {
         async function fetchPredictions() {
             setIsLoading(true);
             try {
+                const accessUsername = getCookieValue('accessUsername');
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
                     setSamplesGames(data);
                 } else {
-                    setSamplesGames([]); // Si no hay datos, establecer un arreglo vacío
+                    setSamplesGames([]);
                 }
             } catch (error) {
-                console.error("Error al obtener predicciones", error);
+                return;
             }
             setIsLoading(false);
         }
@@ -258,7 +259,7 @@ export default function Home() {
                 </>
             )
             }
-            <div className='mt-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
+            <div className='mt-6 mb-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
                 {showSamplesGames && (
                     (samplesGames && samplesGames.length > 0) ? (
                         samplesGames.map((game) => (
