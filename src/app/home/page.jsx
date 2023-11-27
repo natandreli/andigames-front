@@ -59,7 +59,7 @@ export default function Home() {
         }
     }, [user, followersFollowing]);
 
-    const loadGames = async (reviews) => {
+    const loadGames = async (reviews = user.reviews) => {
         setIsLoadingGames(true);
         const games = [];
         for (const review of reviews) {
@@ -360,6 +360,7 @@ export default function Home() {
                                         steam_rating={game.steam_rating}
                                         platform_rating={game.platform_rating}
                                         url={game.url}
+                                        onDeleteReview={loadGames}
                                     />
                                 </div>
                                 <span

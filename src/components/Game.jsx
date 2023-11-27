@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function Game({ id, title, cover = null, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, friend_review = null, w = 120, h = 170 }) {
+export default function Game({ id, title, cover = null, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, onDeleteReview = null, friend_review = null, w = 120, h = 170 }) {
 
     const router = useRouter();
 
@@ -102,6 +102,9 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                 setReviewed(false);
                 setBadDeleteReview(false);
                 setOpenModal(true);
+                if (onDeleteReview) {
+                    onDeleteReview();
+                }
             }
         }
     }
