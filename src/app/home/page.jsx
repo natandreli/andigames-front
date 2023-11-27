@@ -30,6 +30,8 @@ export default function Home() {
 
     const [showWishList, setShowWishList] = useState(false);
 
+    const [shouldUpdateGames, setShouldUpdateGames] = useState(false);
+
     useEffect(() => {
         const accessToken = getCookieValue('accessToken');
         if (!accessToken || accessToken.trim() === '') {
@@ -71,6 +73,29 @@ export default function Home() {
         setGamesToShow(games);
         setIsLoadingGames(false);
     };
+
+    useEffect(() => {
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            async function fetchUser() {
+                const username = getCookieValue('accessUsername');
+                const data = await getUserDetails(username);
+                if (data) {
+                    setUser(data);
+                    const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
+                    if (data && dataFollowersFollowing) {
+                        setFollowersFollowing(dataFollowersFollowing);
+                        await loadGames(data.reviews);
+                    }
+                } else {
+                    setUserDontExist(true);
+                }
+            }
+            fetchUser();
+        }
+    }, [shouldUpdateGames]);
 
     const genres = [
         "Acción",
@@ -360,7 +385,7 @@ export default function Home() {
                                         steam_rating={game.steam_rating}
                                         platform_rating={game.platform_rating}
                                         url={game.url}
-                                        onDeleteReview={loadGames}
+                                        onDeleteReview={() => setShouldUpdateGames(true)}
                                     />
                                 </div>
                                 <span
