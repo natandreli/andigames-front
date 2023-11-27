@@ -117,7 +117,6 @@ export default function Home() {
 
     useEffect(() => {
         if (samplesGames) {
-            console.log(samplesGames);
             setShowSamplesGames(true);
             setIsLoading(false);
         }

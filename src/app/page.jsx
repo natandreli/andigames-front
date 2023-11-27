@@ -215,7 +215,7 @@ export default function Home() {
         <h2 className={`font-light text-base sm:text-lg mt-7 sm:px-[100px] text-center text-white sm:leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
         <button
           className="m-auto mt-10 bg-[#A61145] hover:bg-opacity-80 text-white px-10 py-3 rounded-full"
-          onClick={() => setOpenModalSingup(true)}
+          onClick={() => setOpenModalSignup(true)}
         >
           Comenzar
         </button>
