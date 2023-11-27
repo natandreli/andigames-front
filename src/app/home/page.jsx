@@ -59,13 +59,23 @@ export default function Home() {
         }
     }, [user, followersFollowing]);
 
-    const loadGames = async (reviews = user.reviews) => {
+    const loadGames = async (reviews = await getUserDetails(username).reviews) => {
         setIsLoadingGames(true);
-        const games = [];
-        for (const review of reviews) {
-            const game = await searchGame(review);
-            if (game) {
-                games.push(game);
+        if (!reviews) {
+            const games = [];
+            for (const review of user.reviews) {
+                const game = await searchGame(review);
+                if (game) {
+                    games.push(game);
+                }
+            }
+        } else {
+            const games = [];
+            for (const review of reviews) {
+                const game = await searchGame(review);
+                if (game) {
+                    games.push(game);
+                }
             }
         }
         setGamesToShow(games);
