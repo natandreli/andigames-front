@@ -78,7 +78,6 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             if (!res) {
                 setBadReview(true);
             } else {
-                console.log(res)
                 setOpenModalReview(false);
                 setMyReview(res);
                 setBadReview(false);
@@ -160,12 +159,6 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             fetchReviewAndWishlist();
         }
     }), [user];
-
-    useEffect(() => {
-        if (myReview) {
-            setIsLoading(false);
-        }
-    }), [myReview];
 
     return (
         <div>
