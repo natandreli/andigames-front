@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.andigames.online";
-//const BASE_URL = "http://127.0.0.1:8000";
+//const BASE_URL = "https://api.andigames.online";
+const BASE_URL = "http://127.0.0.1:8000";
 
 export async function handleLogin(credentials) {
     try {
@@ -24,7 +24,6 @@ export async function handleLogin(credentials) {
 
         return res.status;
     } catch (error) {
-        console.error("Error en el servicio de inicio de sesión:", error);
         return 666;
     }
 }

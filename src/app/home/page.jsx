@@ -250,7 +250,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonAllClick}
-                                    disabled={isButtonAllDisabled}
+                                    disabled={true}
                                 >
                                     Todos
                                 </button>
@@ -262,7 +262,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonLoveClick}
-                                    disabled={isButtonLoveDisabled}
+                                    disabled={true}
                                 >
                                     Me encantaron
                                 </button>
@@ -274,7 +274,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonLikeClick}
-                                    disabled={isButtonLikeDisabled}
+                                    disabled={true}
                                 >
                                     Me gustaron
                                 </button>
@@ -286,7 +286,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonMehClick}
-                                    disabled={isButtonMehDisabled}
+                                    disabled={true}
                                 >
                                     Meh
                                 </button>
@@ -298,7 +298,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonDislikeClick}
-                                    disabled={isButtonDislikeDisabled}
+                                    disabled={true}
                                 >
                                     No me gustaron
                                 </button>
@@ -310,7 +310,7 @@ export default function Home() {
                                         : 'hover:text-white hover:bg-[#8B2E4F]'
                                         }  px-3 sm:py-3 py-2 rounded-lg`}
                                     onClick={handleButtonHateClick}
-                                    disabled={isButtonHateDisabled}
+                                    disabled={true}
                                 >
                                     Fueron lo peor
                                 </button>

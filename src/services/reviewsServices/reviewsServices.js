@@ -37,10 +37,34 @@ export async function addReview(game_id, user_nickname, review_date, rating, com
         if (!res.ok) {
             return null;
         }
+
         const data = await res.json();
         return data;
     } catch (error) {
         console.error('Error en el servicio addReview:', error);
+        return null;
+    }
+}
+
+export async function deleteReview(nickname, id, token) {
+    try {
+        const res = await fetch(`${BASE_URL}/reviews/${nickname}/${id}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'accept': 'application/json',
+            },
+            body: new URLSearchParams({ 
+                nickname: nickname,
+                id: id
+             }).toString(),
+        });
+        if (!res.ok) {
+            return null;
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
         return null;
     }
 }

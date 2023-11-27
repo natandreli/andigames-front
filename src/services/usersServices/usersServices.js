@@ -11,7 +11,6 @@ export async function getUser(nickname) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio getUser:', error);
         return null;
     }
 }
@@ -26,7 +25,6 @@ export async function getUserDetails(nickname) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio getUserDetails:', error);
         return null;
     }
 }
@@ -40,7 +38,6 @@ export async function getUserFollowersAndFollowing(nickname) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio etUserFollowersAndFollowing:', error);
         return null;
     }
 }
@@ -64,7 +61,6 @@ export async function follow(nickname, follower, token) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio follow:', error);
         return null;
     }
 }
@@ -88,7 +84,6 @@ export async function unfollow(nickname, follower, token) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio unfollow:', error);
         return null;
     }
 }

@@ -12,15 +12,12 @@ export async function handleSignup(singupValues) {
             body: JSON.stringify(singupValues),
         });
 
-        console.log(res);
-
         if (res.status !== 200) {
             return res;
         }
 
         return res;
     } catch (error) {
-        console.error("Error en el servicio de registro:", error);
         return 666;
     }
 }

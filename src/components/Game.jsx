@@ -3,7 +3,7 @@ import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Review from './Review';
 import { getUserDetails } from '@/services/usersServices/usersServices';
-import { getReview, addReview } from '@/services/reviewsServices/reviewsServices';
+import { getReview, addReview, deleteReview } from '@/services/reviewsServices/reviewsServices';
 import { getCookieValue } from '@/utils/getCookieValue';
 import { useRouter } from 'next/navigation';
 
@@ -39,6 +39,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
 
     const [user, setUser] = useState(null);
     const [myReview, setMyReview] = useState(null);
+    const [friendReview, setFriendReview] = useState(null);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -47,6 +48,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
 
     const [commentary, setCommentary] = useState('');
     const [badReview, setBadReview] = useState(false);
+    const [badDeleteReview, setBadDeleteReview] = useState(false);
 
     const handleAddReview = async () => {
         setOpenModal(false);
@@ -54,16 +56,16 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
     }
 
     const handleDeleteReview = async () => {
+        setOpenModal(false);
         setOpenModalDeleteReview(true);
     }
 
     const handleSubmitReview = async (e) => {
+        e.preventDefault();
         const accessToken = getCookieValue('accessToken');
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');
         } else {
-            e.preventDefault();
-            const accessToken = getCookieValue('accessToken');
             const accessUsername = getCookieValue('accessUsername');
 
             const today = new Date();
@@ -73,14 +75,29 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             const reviewDate = `${year}-${month}-${day}`;
 
             const res = await addReview(parseInt(id, 10), accessUsername, reviewDate, parseFloat(rating), commentary, accessToken);
-            if (res.status !== 200) {
+            if (!res) {
                 setBadReview(true);
             } else {
                 setBadReview(false);
                 setOpenModal(true)
             }
         }
+    }
 
+    const submitDeleteReview = async () => {
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            const accessUsername = getCookieValue('accessUsername');
+            const res = await deleteReview(accessUsername, parseInt(id, 10), accessToken);
+            if (!res) {
+                setBadDeleteReview(true);
+            } else {
+                setBadDeleteReview(false);
+                setOpenModal(true)
+            }
+        }
     }
 
     const deleteGameWishlist = async () => {
@@ -92,6 +109,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
     }
 
     useEffect(() => {
+        console.log(id)
         const accessToken = getCookieValue('accessToken');
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');
@@ -100,6 +118,10 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                 const accessUsername = getCookieValue('accessUsername');
                 const userDetails = await getUserDetails(accessUsername);
                 setUser(userDetails);
+                if (friend_review) {
+                    const reviewDetails = await getReview(friend_review, id);
+                    setFriendReview(reviewDetails);
+                }
             }
             fetchUser();
         }
@@ -272,9 +294,8 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                             </div>
                                         </div>
                                     </div>
-                                    {friend_review &&
-                                        // <Review {...friend_review} />
-                                        <span>Review amigo</span>
+                                    {friendReview &&
+                                        <Review {...friendReview} />
                                     }
                                     {reviewed &&
                                         <Review {...myReview} />
@@ -291,6 +312,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                     onClose={() => {
                         setOpenModalReview(false)
                         setBadReview(false)
+                        setOpenModal(true)
                         setCommentary('')
                         setRating(1)
                     }}>
@@ -321,6 +343,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                     <button className="absolute top-4 right-4"
                                         onClick={() => {
                                             setOpenModalReview(false)
+                                            setOpenModal(true)
                                             setBadReview(false)
                                             setCommentary('')
                                             setRating(1)
@@ -390,7 +413,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                                     ></textarea>
                                                 </div>
                                                 {badReview &&
-                                                    <div className="">
+                                                    <div className="mb-5">
                                                         <label className="block text-neutral-400 text-sm">
                                                             <span className="text-red-500">
                                                                 Parece que algo salió mal. Intenta de nuevo, por favor.
@@ -407,13 +430,109 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                                     <div className="mb-4 sm:mb-0 sm:w-[50%] sm:flex-col-reverse">
                                                         <div
                                                             className="cursor-pointer justify-center flex items-center w-full bg-[#A61145] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
-                                                            onClick={() => setOpenModalReview(false)}
+                                                            onClick={() => {
+                                                                setOpenModalReview(false)
+                                                                setOpenModal(true)
+                                                            }}
                                                         >
                                                             Cancelar
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div >
+                </Dialog >
+            </Transition.Root >
+
+            <Transition.Root show={openModalDeleteReview} as={Fragment}>
+                <Dialog as="div" className="relative z-10"
+                    onClose={() => {
+                        setBadDeleteReview(false)
+                        setOpenModal(true)
+                        setOpenModalDeleteReview(false)
+                    }}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-neutral-900 bg-opacity-70 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="sm:py-4 px-4 relative transform overflow-hidden rounded-lg bg-neutral-800 text-left shadow-xl transition-all sm:m-8 w-xl sm:w-full sm:max-w-[725px]">
+                                    <button className="absolute top-4 right-4"
+                                        onClick={() => {
+                                            setBadDeleteReview(false)
+                                            setOpenModal(true)
+                                            setOpenModalDeleteReview(false)
+                                        }}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#737373" className="w-5 h-5 hover:fill-neutral-400">
+                                            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                        </svg>
+                                    </button>
+                                    <div className="bg-neutral-800 pt-6 sm:pt-10 mt-5 sm:mt-0 text-left text-neutral-400 text-sm sm:text-base flex flex-col items-center justify-center">
+                                        <div className='container mx-auto text-center'>
+                                            <h1 className={`font-bold text-xl md:text-3xl text-center text-white leading-tight ${lexend.className}`}>
+                                                ¿Estás seguro?
+                                            </h1>
+                                            <h2 className={`font-semibold px-6 sm:px-0 text-sm md:text-lg mt-5 text-center text-neutral-400 leading-tight ${lexend.className}`}>
+                                                Se eliminará tu reseña del juego: <span className='text-[#fbbf24]'>{title}</span>
+                                            </h2>
+                                        </div>
+                                        <div className="w-full text-xs sm:text-sm items-center justify-center bg-neutral-800 rounded px-6 md:px-8 lg:px-10 pt-5 pb-10">
+                                            {badDeleteReview &&
+                                                <div className="mb-5">
+                                                    <label className="block text-neutral-400 text-sm">
+                                                        <span className="text-red-500">
+                                                            Parece que algo salió mal. Intenta de nuevo, por favor.
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div className="flex flex-col sm:flex-row justify-between sm:gap-5">
+                                                <div className="sm:w-[50%] sm:mb-0 mb-4">
+                                                    <button
+                                                        className="w-full bg-[#6500E1] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
+                                                        onClick={() => { submitDeleteReview() }}
+                                                    >
+                                                        Eliminar reseña
+                                                    </button>
+                                                </div>
+                                                <div className="mb-4 sm:mb-0 sm:w-[50%] sm:flex-col-reverse">
+                                                    <div
+                                                        className="cursor-pointer justify-center flex items-center w-full bg-[#A61145] hover:bg-opacity-80 text-white font-base py-2 px-4 rounded"
+                                                        onClick={() => {
+                                                            setBadDeleteReview(false)
+                                                            setOpenModal(true)
+                                                            setOpenModalDeleteReview(false)
+                                                        }
+                                                        }
+                                                    >
+                                                        No, cancelar
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </Dialog.Panel>
