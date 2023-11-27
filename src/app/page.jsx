@@ -354,7 +354,7 @@ export default function Home() {
                         <button
                           className="w-full text-xs sm:text-sm hover:text-[#FF5B94] text-neutral-400 rounded"
                           onClick={() => {
-                            setOpenModalSingup(true)
+                            setOpenModalSignup(true)
                             setOpenModalLogin(false)
                           }}
                         >
