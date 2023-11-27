@@ -82,8 +82,10 @@ export default function Home() {
             const accessUsername = getCookieValue('accessUsername');
             const getSamplesGames = async () => {
                 const data = await getGamesPredictions(accessUsername);
-                if (data) {
+                if (data && data.length > 0) {
                     setSamplesGames(data);
+                } else {
+                    setSamplesGames([]); // Establecer a un arreglo vacío si no hay datos
                 }
             }
             getSamplesGames();
@@ -234,15 +236,11 @@ export default function Home() {
             )
             }
             <div className='px-10 xl:px-20 py-4'>
-                {showSamplesGames && (
-                    <>
-                        <div className="text-left text-neutral-300 text-base sm:text-2xl">
-                            <span className={`font-semibold ${lexend.className}`}>
-                                {title}
-                            </span>
-                        </div>
-                        <div className='mt-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
-                            {samplesGames.map((game) => (
+            {showSamplesGames && (
+                <>
+                    {samplesGames && samplesGames.length > 0 ? (
+                        <div>
+                              {samplesGames.map((game) => (
                                 <div key={game.id}>
                                     <div style={{ display: 'inline-block', textAlign: 'left' }}>
                                         <Game
@@ -274,12 +272,17 @@ export default function Home() {
                                         {game.title}
                                     </span>
                                 </div>
-                            )
-                            )}
+                              ))}
                         </div>
-                    </>
-                )}
-            </div>
+                    ) : (
+                        // Mostrar mensaje si no hay predicciones
+                        <div className="text-center text-neutral-400">
+                            <p className="text-xl">Debes tener reseñas para hacer predicciones.</p>
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
         </div >
     )
 }

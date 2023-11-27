@@ -10,7 +10,6 @@ export async function getReview(nickname, game_id) {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error en el servicio getUser:', error);
         return null;
     }
 }
@@ -32,8 +31,6 @@ export async function addReview(game_id, user_nickname, review_date, rating, com
                 commentary: commentary
              }),
         });
-
-        console.log(res);
 
         if (!res.ok) {
             return null;

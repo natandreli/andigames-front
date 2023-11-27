@@ -25,6 +25,7 @@ export async function getGamesPredictions(user_nickname) {
     try {
         const res = await fetch(`${BASE_URL}/games/predictions/${user_nickname}`);
         const data = await res.json();
+        console.log(data);
         return data;
     } catch (error) {
         return null;
