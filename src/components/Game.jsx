@@ -78,6 +78,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             if (!res) {
                 setBadReview(true);
             } else {
+                setMyReview(res);
                 setBadReview(false);
                 setOpenModal(true)
             }
@@ -94,6 +95,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
             if (!res) {
                 setBadDeleteReview(true);
             } else {
+                setMyReview(null);
                 setBadDeleteReview(false);
                 setOpenModal(true)
             }
