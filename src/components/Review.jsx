@@ -13,7 +13,7 @@ export default function Review({ game_id, user_nickname, rating, review_date, co
                     <span className={`font-bold text-lg sm:text-2xl ${lexend.className}`}>Reseña por <span className='text-[#fbbf24]'>@{user_nickname}</span> </span>
                 </p>
                 <p className="mb-1">
-                    <span className={`font-bold ${lexend.className}`}>Fecha:</span> {review_date.toString()}
+                    <span className={`font-bold ${lexend.className}`}>Fecha:</span> {review_date}
                 </p>
                 <p className="">
                     <span className={`font-bold ${lexend.className}`}>Puntuación:</span> {rating}
