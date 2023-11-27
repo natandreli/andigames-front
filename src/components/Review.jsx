@@ -3,14 +3,14 @@ import { useRouter } from 'next/navigation';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] });
 
-export default function Review({ nickname, review_date, rating, commentary }) {
+export default function Review({ game_id, user_nickname, rating, review_date, commentary, id }) {
     const router = useRouter();
 
     return (
         <div className="bg-neutral-800 px-4 pb-4 sm:px-6">
             <div className="text-left text-neutral-400 text-sm sm:text-base">
                 <p className="mb-3 sm:mt-0 mt-6">
-                    <span className={`font-bold text-lg sm:text-2xl ${lexend.className}`}>{'Calificación por ' + nickname + ':'}</span>
+                    <span className={`font-bold text-lg sm:text-2xl ${lexend.className}`}>Reseña por <span className='text-[#fbbf24]'>@{user_nickname}</span> </span>
                 </p>
                 <p className="mb-1">
                     <span className={`font-bold ${lexend.className}`}>Fecha:</span> {review_date}

@@ -1,12 +1,76 @@
 import { Lexend } from 'next/font/google';
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState, useEffect, use } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import Review from './Review';
+import { getUserDetails } from '@/services/usersServices/usersServices';
+import { getReview } from '@/services/reviewsServices/reviewsServices';
+import { getCookieValue } from '@/utils/getCookieValue';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
-export default function Game({ title, cover = null, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, me_review = null, friend_review = null, in_wish_list = true, w = 120, h = 170 }) {
-    const [openModal, setOpenModal] = useState(false)
+export default function Game({ id, title, cover = null, genre, realease_date, publisher, developer, steam_rating, platform_rating, url, friend_review = null, w = 120, h = 170 }) {
+
+    const [openModal, setOpenModal] = useState(false);
+
+    const [inWishlist, setInWishlist] = useState(false);
+    const [reviewed, setReviewed] = useState(false);
+
+    const [user, setUser] = useState(null);
+    const [myReview, setMyReview] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const deleteReview = async () => {
+        console.log('delete review');
+    }
+    
+    const addReview = async () => {
+        console.log('add review');
+    }
+
+    const deleteGameWishlist = async () => {
+        console.log('delete game wishlist');
+    }
+
+    const addGameWishlist = async () => {
+        console.log('add game wishlist');
+    }
+
+    useEffect(() => {
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            async function fetchUser() {
+                const accessUsername = getCookieValue('accessUsername');
+                const userDetails = await getUserDetails(accessUsername);
+                setUser(userDetails);
+            }
+            fetchUser();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            async function fetchReviewAndWishlist() {
+                if (user.reviews.some((review) => review === id)) {
+                    setReviewed(true);
+                    const reviewDetails = await getReview(user.nickname, id);
+                    setMyReview(reviewDetails);
+                }
+                if (user.wishlist.some((review) => review === id)) {
+                    setInWishlist(true);
+                }
+            }
+            fetchReviewAndWishlist();
+        }
+    }), [user];
+
+    useEffect(() => {
+        if (myReview, inWishlist) {
+            setIsLoading(false);
+        }
+    }), [myReview, inWishlist];
 
     return (
         <div>
@@ -92,7 +156,7 @@ export default function Game({ title, cover = null, genre, realease_date, publis
                                                         <span className={`font-bold ${lexend.className}`}>Desarrollador:</span> {developer}
                                                     </p>
                                                     <p className="mb-0">
-                                                        <span className={`font-bold ${lexend.className}`}>Puntuación en Steam:</span> {steam_rating}
+                                                        <span className={`font-bold ${lexend.className}`}>Puntuación en Steam:</span> {(steam_rating / 10).toFixed(1)}
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-5 h-5 sm:w-6 sm:h-6 mb-2  ml-1 inline-block">
                                                             <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
                                                         </svg>
@@ -102,37 +166,46 @@ export default function Game({ title, cover = null, genre, realease_date, publis
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#fbbf24" className="w-5 h-5 sm:w-6 sm:h-6 mb-2  mx-1 inline-block">
                                                             <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
                                                         </svg>
-                                                        {/* <span className="inline-block text-amber-400 text-[10px] sm:text-sm">(123)</span> */}
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col items-center sm:flex-row sm:items-start mt-4">
                                                     <button
-                                                        className={`mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md px-3 py-2 text-xs border border-neutral-400 ${me_review ? 'bg-neutral-400 text-neutral-700 font-semibold hover:bg-neutral-300' : 'text-neutral-400 bg-neutral-800 hover:bg-neutral-700'}`}
-                                                        onClick={() => handlePlay()}
+                                                        className={`items-center justify-center text-center px-2 px-3 py-2 mb-3 sm:mr-3 text-xs inline-flex w-full sm:w-auto
+                                                        rounded-md text-neutral-400 border-2 text-neutral-300 hover:bg-opacity-20
+                                                        ${reviewed
+                                                                ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145]'
+                                                                : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761]'}`}
+                                                        onClick={reviewed ? deleteReview : addReview}
                                                     >
-                                                        {me_review ? 'No lo he jugado' : '¡Lo he jugado!'}
+                                                        {reviewed ? 'No lo he jugado' : '¡Lo he jugado!'}
                                                     </button>
                                                     <button
-                                                        className="mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md bg-neutral-800 px-3 py-2 text-xs text-neutral-400 border border-neutral-400 hover:bg-neutral-700"
+                                                        className={`items-center justify-center text-center px-2 px-3 py-2 mb-3 sm:mr-3 text-xs inline-flex w-full sm:w-auto
+                                                        rounded-md text-neutral-400 border-2 text-neutral-300 hover:bg-opacity-20 bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761]`}
                                                         onClick={() => window.open('https://store.steampowered.com' + url, '_blank')}
                                                     >
                                                         Ir a la tienda
                                                     </button>
                                                     <button
-                                                        className={`mb-3 sm:mr-3 inline-flex w-full sm:w-auto justify-center rounded-md px-3 py-2 text-xs border border-neutral-400 ${in_wish_list ? 'bg-neutral-400 text-neutral-700 font-semibold hover:bg-neutral-300' : 'text-neutral-400 bg-neutral-800 hover:bg-neutral-700'}`}
-                                                        onClick={() => handleAddToWishlist()}
+                                                        className={`items-center justify-center text-center px-2 px-3 py-2 mb-3 sm:mr-3 text-xs inline-flex w-full sm:w-auto
+                                                        rounded-md text-neutral-400 border-2 text-neutral-300 hover:bg-opacity-20
+                                                        ${inWishlist
+                                                                ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145]'
+                                                                : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761]'}`}
+                                                        onClick={inWishlist ? deleteGameWishlist : addGameWishlist}
                                                     >
-                                                        {in_wish_list ? 'Quitar de mi lista de deseos' : 'Añadir a mi lista de deseos'}
+                                                        {inWishlist ? 'Quitar de mi lista de deseos' : 'Añadir a mi lista de deseos'}
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     {friend_review &&
-                                        <Review {...friend_review} />
+                                        // <Review {...friend_review} />
+                                        <span>Review amigo</span>
                                     }
-                                    {me_review &&
-                                        <Review {...me_review} />
+                                    {reviewed &&
+                                        <Review {...myReview} />
                                     }
                                 </Dialog.Panel>
                             </Transition.Child>

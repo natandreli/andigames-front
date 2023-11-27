@@ -18,6 +18,7 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                         {games.map((game, index) => (
                             <div key={game.id} className="relative" style={{ minWidth: '130px' }}>
                                 <Game
+                                    id={game.id}
                                     title={game.title}
                                     cover={game.cover}
                                     genre={game.genre}
@@ -27,7 +28,6 @@ export default function SampleGames({ title, games, useNumbers = false }) {
                                     steam_rating={game.steam_rating}
                                     platform_rating={game.platform_rating}
                                     url={game.url}
-                                    me_review={game.me_review ? game.me_review : null}
                                     w={130}
                                     h={184}
                                 />

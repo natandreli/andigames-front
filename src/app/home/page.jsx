@@ -38,6 +38,7 @@ export default function Home() {
             async function fetchUser() {
                 const username = getCookieValue('accessUsername');
                 const data = await getUserDetails(username);
+                console.log(data);
                 if (data) {
                     setUser(data);
                     const dataFollowersFollowing = await getUserFollowersAndFollowing(username);
@@ -327,10 +328,9 @@ export default function Home() {
                             </button>
                         </div>
                     </div>
-                    {/* <span className="text-neutral-400 mr-4">Número de juegos: {gamesToShow.length}</span> */}
                     <div className="mb-5 flex flex-col">
                         <span className="text-neutral-400 mb-0.5 text-xs xl:text-sm ml-1 mt-1 md:mt-0">Género</span>
-                        <select className="text-neutral-400 bg-neutral-900 px-2 py-1 border border-neutral-500 rounded-md h-9 sm:h-10 w-[280px] sm:w-[275px] md:w-[260px] xl:w-[150px] text-xs xl:text-sm">
+                        <select disabled={true} className="text-neutral-400 bg-neutral-900 px-2 py-1 border border-neutral-500 rounded-md h-9 sm:h-10 w-[280px] sm:w-[275px] md:w-[260px] xl:w-[150px] text-xs xl:text-sm">
                             <option value="" defaultValue>Todos</option>
                             {genres.map((genre) => (
                                 <option key={genre} value={genre}>{genre}</option>
@@ -351,6 +351,7 @@ export default function Home() {
                                 <div style={{ display: 'inline-block', textAlign: 'left' }}>
                                     <Game
                                         key={game.id}
+                                        id={game.id}
                                         title={game.title}
                                         cover={game.cover}
                                         genre={game.genres}
@@ -360,8 +361,6 @@ export default function Home() {
                                         steam_rating={game.steam_rating}
                                         platform_rating={game.platform_rating}
                                         url={game.url}
-                                        me_review={game.me_review ? game.me_review : null}
-                                        friend_review={game.friend_review ? game.friend_review : null}
                                     />
                                 </div>
                                 <span

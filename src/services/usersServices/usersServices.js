@@ -68,3 +68,27 @@ export async function follow(nickname, follower, token) {
         return null;
     }
 }
+
+export async function unfollow(nickname, follower, token) {
+    try {
+        const res = await fetch(`${BASE_URL}/users/${nickname}/followers/delete/users/${follower}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'accept': 'application/json',
+            },
+            body: new URLSearchParams({ 
+                nickname: nickname,
+                follower: follower
+             }).toString(),
+        });
+        if (!res.ok) {
+            return null;
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error en el servicio unfollow:', error);
+        return null;
+    }
+}

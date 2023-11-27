@@ -419,6 +419,7 @@ export default function Home() {
                                             <div style={{ display: 'inline-block', textAlign: 'left' }}>
                                                 <Game
                                                     key={game.id}
+                                                    id={game.id}
                                                     title={game.title}
                                                     cover={null}
                                                     genre={game.genres}
@@ -430,8 +431,6 @@ export default function Home() {
                                                     url={game.url}
                                                     w={200}
                                                     h={283}
-                                                    me_review={game.me_review ? game.me_review : null}
-                                                    friend_review={game.friend_review ? game.friend_review : null}
                                                 />
                                             </div>
                                             <span
