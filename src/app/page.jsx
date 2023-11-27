@@ -210,7 +210,7 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <div className='container mt-[100px] mx-auto px-10 pt-5 text-center'>
+      <div className='container mt-[100px] sm:mt-[200px] mx-auto px-10 pt-5 text-center'>
         <h1 className={`font-bold text-2xl sm:text-4xl text-center text-white sm:leading-tight ${lexend.className}`}>Juega, califica y conecta: Tu plataforma para compartir tu experiencia gamer</h1>
         <h2 className={`font-light text-base sm:text-lg mt-7 sm:px-[100px] text-center text-white sm:leading-tight`}>¡Bienvenido a ANDIGAMES! Tu punto de partida para sumergirte en el mundo de los videojuegos, calificar tus experiencias y unirte a una comunidad de jugadores apasionados.</h2>
         <button
