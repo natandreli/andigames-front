@@ -109,7 +109,6 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
     }
 
     useEffect(() => {
-        console.log(id)
         const accessToken = getCookieValue('accessToken');
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');

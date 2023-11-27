@@ -48,7 +48,7 @@ export async function addReview(game_id, user_nickname, review_date, rating, com
 
 export async function deleteReview(nickname, id, token) {
     try {
-        const res = await fetch(`${BASE_URL}/reviews/${nickname}/${id}/delete/`, {
+        const res = await fetch(`${BASE_URL}/reviews/${nickname}/${id}/delete`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

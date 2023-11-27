@@ -20,3 +20,13 @@ export async function searchGames(title) {
         return null;
     }
 }
+
+export async function getGamesPredictions(user_nickname) {
+    try {
+        const res = await fetch(`${BASE_URL}/games/predictions/${user_nickname}`);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        return null;
+    }
+}
