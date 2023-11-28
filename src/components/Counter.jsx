@@ -16,7 +16,7 @@ export default function Counter({ followers, following, reviews }) {
                 <div className='mr-5'>
                     <button className='cursor-not-allowed'>
                         <div className={`text-neutral-400 text-xs lg:text-sm`}>Juegos</div>
-                        <div className={`text-white text-[10px] lg:text-xs`}>{reviews.length}</div>
+                        <div className={`text-white text-xs lg:text-xs`}>{reviews.length}</div>
                     </button>
                 </div>
                 <div className='mr-5'>
