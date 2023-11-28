@@ -6,25 +6,48 @@ import Navbar from '@/components/Navbar';
 import ActivityCard from '@/components/ActivityCard';
 import Particle from '@/components/Particle';
 import { getCookieValue } from '@/utils/getCookieValue';
+import { useRouter } from 'next/navigation';
+import SuperProfileCard from '@/components/SuperProfileCard';
+import { getUsers } from '@/services/usersServices/usersServices';
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
 export default function Home() {
 
-    const [showActivity, setShowActivity] = useState(true);
+    const router = useRouter();
+
+    const [showUsers, setShowUsers] = useState(true);
     const [searchValue, setSearchValue] = useState('');
+    const [users, setUsers] = useState(null);
+    const [isLoadingUsers, setIsLoadingUsers] = useState(false);
 
     const handleSearchInputChange = (event) => {
         const value = event.target.value;
         setSearchValue(value);
-        setShowActivity(value === '');
+        setShowUsers(value === '');
     };
 
-    const reviewData = {
-        gameTitle: 'Nombre del Juego',
-        content: 'Esta es una reseña sobre el juego. Me gustó mucho...',
-        rating: 4, 
-    };
+    useEffect(() => {
+        const accessToken = getCookieValue('accessToken');
+        if (!accessToken || accessToken.trim() === '') {
+            router.push('/');
+        } else {
+            setIsLoadingUsers(true);
+            async function fetchUser() {
+                const data = await getUsers();
+                if (data) {
+                    setUsers(data);
+                }
+            }
+            fetchUser();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (users) {
+            setIsLoadingUsers(false);
+        }
+    }, [users]);
 
     return (
         <div className=''>
@@ -48,17 +71,33 @@ export default function Home() {
                     />
                 </div>
             </div>
-            {!showActivity && (
-                <div className="pr-10 pl-11 xl:pl-20 pt-3 text-sm text-neutral-400">
-                    Buscar "<span className="font-bold">{searchValue}</span>"
-                </div>
-            )}
-            <div className='px-10 xl:px-20 py-4'>
-                {showActivity && (
-                    <div>
-                        <ActivityCard {...reviewData} />
+            {showUsers
+                ? (
+                    users
+                        ? (
+                            <div className='px-10 xl:px-20 pt-5'>
+                                {users.map((user) => (
+                                    <div key={user.nickname} className='mb-5'>
+                                    <SuperProfileCard
+                                    photo={null}
+                                    nickname={user.username}
+                                    username={user.nickname}
+                                    />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-center text-neutral-400 pt-10">
+                                <p className="text-xl">Cargando...</p>
+                            </div>
+                        )
+                ) : (
+                    <div className="pr-10 pl-11 xl:pl-20 pt-3 text-sm text-neutral-400">
+                        Buscar "<span className="font-bold">{searchValue}</span>"
                     </div>
                 )}
+            <div className='px-10 xl:px-20 py-4'>
+
             </div>
         </div >
     )

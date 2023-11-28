@@ -15,6 +15,20 @@ export async function getUser(nickname) {
     }
 }
 
+export async function getUsers() {
+    try {
+        const res = await fetch(`${BASE_URL}/users`);
+
+        if (!res.ok) {
+            return null;
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        return null;
+    }
+}
+
 export async function getUserDetails(nickname) {
     try {
         const res = await fetch(`${BASE_URL}/users/${nickname}/details`);
