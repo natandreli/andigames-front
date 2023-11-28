@@ -85,7 +85,7 @@ export default function Home() {
             const getSamplesGames = async () => {
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
-                    Math.shuffle(data);
+                    data.sort(() => Math.random() - 0.5);
                     if (data.length > 12) {
                         setSamplesGames(data.slice(0, 12));
                     } else {
@@ -106,7 +106,7 @@ export default function Home() {
                 const accessUsername = getCookieValue('accessUsername');
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
-                    Math.shuffle(data);
+                    data.sort(() => Math.random() - 0.5);
                     if (data.length > 12) {
                         setSamplesGames(data.slice(0, 12));
                     } else {
