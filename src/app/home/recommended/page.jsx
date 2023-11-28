@@ -85,7 +85,11 @@ export default function Home() {
             const getSamplesGames = async () => {
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
-                    setSamplesGames(data);
+                    if (data.length > 12) {
+                        setSamplesGames(data.slice(0, 12));
+                    } else {
+                        setSamplesGames(data);
+                    }
                 } else {
                     setSamplesGames([]); // Establecer a un arreglo vacío si no hay datos
                 }
@@ -101,7 +105,11 @@ export default function Home() {
                 const accessUsername = getCookieValue('accessUsername');
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
-                    setSamplesGames(data);
+                    if (data.length > 12) {
+                        setSamplesGames(data.slice(0, 12));
+                    } else {
+                        setSamplesGames(data);
+                    }
                 } else {
                     setSamplesGames([]);
                 }
@@ -262,50 +270,50 @@ export default function Home() {
             <div className='mt-6 mb-6 px-10 xl:px-20 items-top justify-center flex flex-wrap gap-6 lg:gap-10'>
                 {showSamplesGames && (
                     (!isLoadigPredictions) ? (
-                    (samplesGames && samplesGames.length > 0) ? (
-                        samplesGames.map((game) => (
-                            <div key={game.id}>
-                                <div style={{ display: 'inline-block', textAlign: 'left' }}>
-                                    <Game
-                                        key={game.id}
-                                        id={game.id}
-                                        title={game.title}
-                                        cover={game.cover}
-                                        genre={game.genres}
-                                        release_date={game.release_date}
-                                        publisher={game.publisher}
-                                        developer={game.developer}
-                                        steam_rating={game.steam_rating}
-                                        platform_rating={game.platform_rating}
-                                        url={game.url}
-                                        w={200}
-                                        h={283}
-                                    />
+                        (samplesGames && samplesGames.length > 0) ? (
+                            samplesGames.map((game) => (
+                                <div key={game.id}>
+                                    <div style={{ display: 'inline-block', textAlign: 'left' }}>
+                                        <Game
+                                            key={game.id}
+                                            id={game.id}
+                                            title={game.title}
+                                            cover={game.cover}
+                                            genre={game.genres}
+                                            release_date={game.release_date}
+                                            publisher={game.publisher}
+                                            developer={game.developer}
+                                            steam_rating={game.steam_rating}
+                                            platform_rating={game.platform_rating}
+                                            url={game.url}
+                                            w={200}
+                                            h={283}
+                                        />
+                                    </div>
+                                    <span
+                                        style={{
+                                            display: 'block',
+                                            marginTop: '10px',
+                                            textAlign: 'center',
+                                            maxWidth: '200px',
+                                            margin: '0 auto',
+                                        }}
+                                        className={`text-sm sm:text-base text-white leading-tight ${lexend.className}`}
+                                    >
+                                        {game.title}
+                                    </span>
                                 </div>
-                                <span
-                                    style={{
-                                        display: 'block',
-                                        marginTop: '10px',
-                                        textAlign: 'center',
-                                        maxWidth: '200px',
-                                        margin: '0 auto',
-                                    }}
-                                    className={`text-sm sm:text-base text-white leading-tight ${lexend.className}`}
-                                >
-                                    {game.title}
-                                </span>
+                            ))
+                        ) : (
+                            <div className="text-center text-neutral-400">
+                                <p className="text-xl">Debes tener reseñas para hacer predicciones.</p>
                             </div>
                         ))
-                    ) : (
-                        <div className="text-center text-neutral-400">
-                            <p className="text-xl">Debes tener reseñas para hacer predicciones.</p>
-                        </div>
-                    ))
-                    : (
-                        <div className="text-center text-neutral-400">
-                            <p className="text-xl">Cargando...</p>
-                        </div>
-                    )
+                        : (
+                            <div className="text-center text-neutral-400">
+                                <p className="text-xl">Cargando...</p>
+                            </div>
+                        )
                 )}
             </div>
         </div >
