@@ -35,7 +35,6 @@ export default function Home() {
             setBadSearch(false);
             setIsSearching(true);
             const data = await getUser(searchValue);
-            console.log(data);
             if (data) {
                 setFoundUser([data]);
                 setIsSearching(false);

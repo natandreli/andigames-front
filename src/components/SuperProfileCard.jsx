@@ -111,12 +111,12 @@ export default function SuperProfileCard({ photo, nickname, username }) {
             </div>
             <div className="flex flex-col flex-grow">
                 <span
-                    className={`flex items-center font-semibold text-white cursor-pointer hover:text-[#5CFFFF] text-[10px] sm:text-lg leading-normal ${lexend.className}`}
+                    className={`flex items-center font-semibold text-white cursor-pointer hover:text-[#5CFFFF] text-xs sm:text-lg leading-normal ${lexend.className}`}
                     onClick={() => router.push(`/home/${username}`)}
                 >
                     {nickname}
                 </span>
-                <span className={`text-[#305761] text-[8px] sm:text-sm leading-normal ${lexend.className}`}>
+                <span className={`text-[#305761] text-[10px] sm:text-sm leading-normal ${lexend.className}`}>
                     {'@' + username}
                 </span>
             </div>
@@ -124,12 +124,12 @@ export default function SuperProfileCard({ photo, nickname, username }) {
                 <>
                     <div className="ml-auto flex-shrink-0">
                         <div className={`mr-2 sm:mr-5 items-center justify-center text-center font-semibold ${lexend.className}`}>
-                            <div className={`text-neutral-400 text-[8px] sm:text-sm leading-normal`}>Juegos</div>
-                            <div className={`text-white text-[8px] sm:text-xs leading-normal`}>{reviews.length}</div>
+                            <div className={`text-neutral-400 text-xs sm:text-sm leading-normal`}>Juegos</div>
+                            <div className={`text-white text-[10px] sm:text-xs leading-normal`}>{reviews.length}</div>
                         </div>
                     </div>
                     <button className={`items-center justify-center text-center ml-2 px-2 sm:py-2 lg:px-3 py-1 sm:text-sm inline-flex 
-                        w-16 sm:w-36 justify-center rounded-md text-neutral-400 border-2 text-neutral-300 h-full text-[8px] sm:text-base
+                        w-16 sm:w-36 justify-center rounded-md text-neutral-400 border-2 text-neutral-300 h-full text-[10px] sm:text-base
                         bg-opacity-10 hover:bg-opacity-20
                         ${isFollowing
                             ? 'border-[#A61145] bg-[#A61145] hover:bg-[#A61145]'
