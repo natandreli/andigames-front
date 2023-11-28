@@ -11,7 +11,6 @@ import Image from 'next/image';
 import { getCookieValue } from '@/utils/getCookieValue';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
-import Math from "math";
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
