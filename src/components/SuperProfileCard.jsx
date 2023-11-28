@@ -61,21 +61,19 @@ export default function SuperProfileCard({ photo, nickname, username }) {
         if (!accessToken || accessToken.trim() === '') {
             router.push('/');
         } else {
-            async function fetchReviews() {
-                setReviews(await getUserDetails(username).reviews);
                 if (getCookieValue('accessUsername') === username) {
                     setIsMe(true);
                     setIsLoading(false);
                 } else {
                     async function fetchFollowing() {
+                        const res_rev = await getUserDetails(username);
+                        setReviews(res_rev.reviews);
                         const accessUsername = getCookieValue('accessUsername');
                         const res = await getUserFollowersAndFollowing(accessUsername);
                         setFollowing(res.following);
                     }
                     fetchFollowing();
                 }
-            }
-            fetchReviews();
         }
     }, []);
 
