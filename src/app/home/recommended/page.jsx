@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { getCookieValue } from '@/utils/getCookieValue';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
+import Math from "math";
 
 const lexend = Lexend({ subsets: ['latin'], weights: [400, 500, 600, 700] })
 
@@ -85,6 +86,7 @@ export default function Home() {
             const getSamplesGames = async () => {
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
+                    Math.shuffle(data);
                     if (data.length > 12) {
                         setSamplesGames(data.slice(0, 12));
                     } else {
@@ -105,6 +107,7 @@ export default function Home() {
                 const accessUsername = getCookieValue('accessUsername');
                 const data = await getGamesPredictions(accessUsername);
                 if (data && data.length > 0) {
+                    Math.shuffle(data);
                     if (data.length > 12) {
                         setSamplesGames(data.slice(0, 12));
                     } else {
