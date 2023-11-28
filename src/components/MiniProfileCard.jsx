@@ -125,11 +125,11 @@ export default function MiniProfileCard({ photo, reviews, nickname, username }) 
                         </div>
                     </div>
                     <button className={`items-center justify-center text-center ml-2 px-2 sm:py-2 lg:px-3 py-1 sm:text-sm inline-flex 
-                        w-16 sm:w-36 justify-center rounded-md text-neutral-400 border-2 text-neutral-300 h-full text-[10px] sm:text-base
-                        bg-opacity-10 hover:bg-opacity-20
+                        w-20 sm:w-32 justify-center rounded-md text-neutral-400 border-2 text-neutral-300 h-full 
+                        hover:bg-opacity-20
                         ${isFollowing
-                            ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145] text-[10px]'
-                            : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761] text-xs'}
+                            ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145] text-[8px]'
+                            : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761] text-[10px]'}
                                 `}
                         onClick={isFollowing ? handleUnfollow : handleFollow}
                     >

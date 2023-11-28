@@ -24,7 +24,7 @@ export default function Counter({ followers, following, reviews }) {
                         onClick={() => setOpenModalFollowers(true)}
                     >
                         <div className={`text-neutral-400 text-xs lg:text-sm`}>Seguidores</div>
-                        <div className={`text-white text-[10px] lg:text-xs`}>{followers.length}</div>
+                        <div className={`text-white text-xs lg:text-xs`}>{followers.length}</div>
                     </button>
                 </div>
                 <div className='mr-5'>
@@ -32,7 +32,7 @@ export default function Counter({ followers, following, reviews }) {
                         onClick={() => setOpenModalFollowing(true)}
                     >
                         <div className={`text-neutral-400 text-xs lg:text-sm`}>Seguidos</div>
-                        <div className={`text-white text-[10px] lg:text-xs`}>{following.length}</div>
+                        <div className={`text-white text-xs lg:text-xs`}>{following.length}</div>
                     </button>
                 </div>
             </div>
