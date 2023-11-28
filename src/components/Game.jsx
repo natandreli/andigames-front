@@ -282,6 +282,7 @@ export default function Game({ id, title, cover = null, genre, realease_date, pu
                                                                 ? 'bg-[#A61145] border-[#A61145] hover:bg-opacity-90]'
                                                                 : 'bg-[#6500E1] border-[#6500E1] hover:bg-opacity-70'}`}
                                                         onClick={() => { inWishlist ? deleteGameWishlist : addGameWishlist }}
+                                                        disabled={true}
                                                     >
                                                         {inWishlist ? 'Quitar de mi lista de deseos' : 'Añadir a mi lista de deseos'}
                                                     </button>

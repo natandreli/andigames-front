@@ -23,7 +23,7 @@ export default function Home() {
     const reviewData = {
         gameTitle: 'Nombre del Juego',
         content: 'Esta es una reseña sobre el juego. Me gustó mucho...',
-        rating: 4, // La calificación del juego
+        rating: 4, 
     };
 
     return (
