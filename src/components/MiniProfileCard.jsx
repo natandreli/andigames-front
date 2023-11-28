@@ -107,12 +107,12 @@ export default function MiniProfileCard({ photo, reviews, nickname, username }) 
             </div>
             <div className="flex flex-col flex-grow">
                 <span
-                    className={`flex items-center font-semibold text-white cursor-pointer hover:text-[#5CFFFF] text-[10px] sm:text-base leading-normal ${lexend.className}`}
+                    className={`flex items-center font-semibold text-white cursor-pointer hover:text-[#5CFFFF] text-xs sm:text-base leading-normal ${lexend.className}`}
                     onClick={() => router.push(`/home/${username}`)}
                 >
                     {nickname}
                 </span>
-                <span className={`text-[#305761] text-[10px] sm:text-xs leading-normal ${lexend.className}`}>
+                <span className={`text-[#305761] text-xs sm:text-xs leading-normal ${lexend.className}`}>
                     {'@' + username}
                 </span>
             </div>
@@ -120,16 +120,16 @@ export default function MiniProfileCard({ photo, reviews, nickname, username }) 
                 <>
                     <div className="ml-auto flex-shrink-0">
                         <div className={`mr-2 sm:mr-5 items-center justify-center text-center font-semibold ${lexend.className}`}>
-                            <div className={`text-neutral-400 text-[10px] sm:text-sm leading-normal`}>Juegos</div>
-                            <div className={`text-white text-[8px] sm:text-xs leading-normal`}>{reviews.length}</div>
+                            <div className={`text-neutral-400 text-xs sm:text-sm leading-normal`}>Juegos</div>
+                            <div className={`text-white text-[10px] sm:text-xs leading-normal`}>{reviews.length}</div>
                         </div>
                     </div>
                     <button className={`items-center justify-center text-center ml-2 px-2 sm:py-2 lg:px-3 py-1 sm:text-sm inline-flex 
                         w-20 sm:w-32 justify-center rounded-md text-neutral-400 border-2 text-neutral-300 h-full 
                         hover:bg-opacity-20
                         ${isFollowing
-                            ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145] text-[8px]'
-                            : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761] text-[10px]'}
+                            ? 'bg-opacity-5 border-[#A61145] bg-[#A61145] hover:bg-[#A61145] text-[10px]'
+                            : 'bg-opacity-5 border-[#305761] bg-[#305761] hover:bg-[#305761] text-xs'}
                                 `}
                         onClick={isFollowing ? handleUnfollow : handleFollow}
                     >
