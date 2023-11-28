@@ -35,6 +35,7 @@ export default function Home() {
             setBadSearch(false);
             setIsSearching(true);
             const data = await getUser(searchValue);
+            console.log(data);
             if (data) {
                 setFoundUser([data]);
                 setIsSearching(false);
@@ -42,6 +43,7 @@ export default function Home() {
             } else {
                 setFoundUser([]);
                 setAlreadySearch(true);
+                setIsSearching(false);
             }
         }
     };
@@ -177,7 +179,7 @@ export default function Home() {
                             ) : ((foundUser.length === 0 && alreadySearch)
                                 ? (
                                     <div>
-                                        <div className="px-10 justify-center items-center text-center flex-col mt-[150px]">
+                                        <div className="px-10 xl:px-20 justify-center items-center text-center flex-col mt-[150px]">
                                             <h1 className={`font-bold text-2xl lg:text-4xl text-center text-white leading-tight ${lexend.className}`}>
                                                 No hemos encontrado a ningún usuario con ese nombre de usuario...
                                             </h1>
